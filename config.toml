@@ -1,4 +1,38 @@
 baseURL = "http://theanig.github.io/"
+
 languageCode = "en-us"
-title = "TheAnig's Website"
-theme = "hyde"
+
+metaDataFormat = "yaml"
+
+title = "TheAnig"
+
+theme = "hyde-y"
+
+paginate = 10
+
+paginatePath = "page"
+
+
+[taxonomies]
+ tag = "tags"
+ topic = "topics"
+
+[author]
+ name = "TheAnig"
+ email = "theanig@protonmail.com"
+
+[params]
+ brand = "TheAnig"
+ topline = "This is my personal website where I post some of the projects I've worked on"
+ sidebar = "left"
+ highlight = "default"
+
+[blackfriday]
+ angledQuotes = true
+ fractions = false
+ hrefTargetBlank = false
+ latexDashes = true
+ plainIdAnchors = true
+ extensions = []
+ extensionmask = []
+
