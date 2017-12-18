@@ -19,7 +19,8 @@
       <pubDate>Mon, 18 Dec 2017 04:03:39 -0500</pubDate>
       <author>theanig@protonmail.com (TheAnig)</author>
       <guid>https://theanig.github.io/projects/ulam-spiral/</guid>
-      <description>This project was written in golang, I will fill up more details later.</description>
+      <description>This project was written in golang, I will fill up more details later.
+$h_\theta (x) = \sigma(\theta_0 + \theta_1 x_1 + \theta_2 x_2)$</description>
     </item>
     
   </channel>
