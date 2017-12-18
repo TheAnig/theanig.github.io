@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>TheAnig</title>
-    <link>https://theanig.github.io/</link>
-    <description>Recent content on TheAnig</description>
+    <title>Projects on TheAnig</title>
+    <link>https://theanig.github.io/projects/</link>
+    <description>Recent content in Projects on TheAnig</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>theanig@protonmail.com (TheAnig)</managingEditor>
     <webMaster>theanig@protonmail.com (TheAnig)</webMaster>
     <lastBuildDate>Mon, 18 Dec 2017 04:03:39 -0500</lastBuildDate>
     
-	<atom:link href="https://theanig.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://theanig.github.io/projects/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -20,15 +20,6 @@
       <author>theanig@protonmail.com (TheAnig)</author>
       <guid>https://theanig.github.io/projects/ulam-spiral/</guid>
       <description>This project was written in golang, I will fill up more details later.</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>https://theanig.github.io/about/</link>
-      <pubDate>Mon, 18 Dec 2017 04:03:26 -0500</pubDate>
-      <author>theanig@protonmail.com (TheAnig)</author>
-      <guid>https://theanig.github.io/about/</guid>
-      <description>I like to cats, programming and video games.</description>
     </item>
     
   </channel>
