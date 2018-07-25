@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TheAnig's Website</title>
+    <description>TheAnig's Website
+</description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Wed, 25 Jul 2018 02:15:13 -0400</pubDate>
+    <lastBuildDate>Wed, 25 Jul 2018 02:15:13 -0400</lastBuildDate>
+    <generator>Jekyll v3.8.3</generator>
+    
+      <item>
+        <title>Hello, World!</title>
+        <description>&lt;p&gt;This is my first post using the jekyll templating engine, which I’ve planned to be using going forwards. I recently switched over from hugo to because of compatibility issues with MathJax plugin.&lt;/p&gt;
+
+&lt;p&gt;Anyways, this is the blog/documentation website where I plan to document my projects that I’ve done, and post some random pieces of code that I push to my GitHub.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 25 Jul 2018 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/misc/2018/07/25/hello-world.html</link>
+        <guid isPermaLink="true">http://localhost:4000/misc/2018/07/25/hello-world.html</guid>
+        
+        <category>blog,</category>
+        
+        <category>personal</category>
+        
+        
+        <category>misc</category>
+        
+      </item>
+    
+  </channel>
+</rss>
