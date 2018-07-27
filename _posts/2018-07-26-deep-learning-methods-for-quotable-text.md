@@ -136,3 +136,7 @@ The data used in the experiments are as follows,
 * Data from Memorability 2012's paper - 2197 one-sentence memorable quotes paired with surrounding non-memorable quotes from the same movie, spoken by the same character and containing the same number of words.
 
 This gets us around 9,000 pairs of quotes and non-quotes.
+
+### Metrics
+
+To measure the sucess of the system, I used F-1 score this was important as due to the skewing of the dataset, accuracy would be a bad indicator of performance as in a 90-10 split, a dumb classifier that predicts one label all the time would also yields a 90% accuracy which doesn't accurately represent the fact that the classifier hasn't learnt any useful feature from our dataset.
