@@ -104,9 +104,9 @@ $$F(p) = \frac{2}{N*(N-1)}*\sum_{i=1}^N\sum_{j=i+1}^N\frac{d(j) - d(i)}{j-i}$$
 
 
 ## Method
-At its core, the given task can be formulated as a text classification problem. As such, I plan to employ the traditional methods for text classification and then tweak them for the task at hand. From current literature available literature that compares the performance of these techniques on the standard IMDb dataset, I have chosen TextCNN (using the GloVe embeddings) and an LSTM classifier as focal techniques that will be applied to the problem to see how it compares to the existing techniques discussed above.
+At its core, the given task can be formulated as a text classification problem. As such, I plan to employ the traditional methods for text classification and then tweak them for the task at hand. From current literature available literature that compares the performance of these techniques on the standard IMDb dataset, I have chosen TextCNN (using the GloVe embeddings) as focal technique that will be applied to the problem to see how it compares to the existing techniques discussed above.
 
-TextCNN model was chosen because of its flexibility that allows for a lot more granular tweaking which can help increase performance for our given task. LSTM Classifier was also used to give another model to compare it to.
+TextCNN model was chosen because of its flexibility that allows for a lot more granular tweaking which can help increase performance for our given task. 
 
 The test hypothesis for this project is to check whether this model is able to match the performance of the traditional techniques in their respective data and see how it performs.
 
@@ -121,8 +121,6 @@ I test a 50-50 split, a 60-40 split, 70-30 split, 80-20 split and 90-10 split on
 The TextCNN model hyperparameters were tweaked according to Zhang's paper [<cite>"A Sensitivity Analysis of (and Practitioners' Guide to) Convolutional Neural Networks for Sentence Classification" Zhang et al.</cite>] , with GloVe 6B, 300dim vectors.
 
 Filter Size of 3, 4, 5 was used as it unconditionally yields the best result as shown in the paper. A batch size of 50 was used and a dropout of 0.5 was added to prevent overfitting. The model that we are using here is also double channeled.
-
-### LSTM Classifier
 
 ## Experiments
 

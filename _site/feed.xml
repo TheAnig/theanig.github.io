@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 26 Jul 2018 20:24:42 -0400</pubDate>
-    <lastBuildDate>Thu, 26 Jul 2018 20:24:42 -0400</lastBuildDate>
+    <pubDate>Thu, 26 Jul 2018 20:26:47 -0400</pubDate>
+    <lastBuildDate>Thu, 26 Jul 2018 20:26:47 -0400</lastBuildDate>
     <generator>Jekyll v3.8.3</generator>
     
       <item>
@@ -128,9 +128,9 @@ able to learn more effectively.&lt;/p&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;method&quot;&gt;Method&lt;/h2&gt;
-&lt;p&gt;At its core, the given task can be formulated as a text classification problem. As such, I plan to employ the traditional methods for text classification and then tweak them for the task at hand. From current literature available literature that compares the performance of these techniques on the standard IMDb dataset, I have chosen TextCNN (using the GloVe embeddings) and an LSTM classifier as focal techniques that will be applied to the problem to see how it compares to the existing techniques discussed above.&lt;/p&gt;
+&lt;p&gt;At its core, the given task can be formulated as a text classification problem. As such, I plan to employ the traditional methods for text classification and then tweak them for the task at hand. From current literature available literature that compares the performance of these techniques on the standard IMDb dataset, I have chosen TextCNN (using the GloVe embeddings) as focal technique that will be applied to the problem to see how it compares to the existing techniques discussed above.&lt;/p&gt;
 
-&lt;p&gt;TextCNN model was chosen because of its flexibility that allows for a lot more granular tweaking which can help increase performance for our given task. LSTM Classifier was also used to give another model to compare it to.&lt;/p&gt;
+&lt;p&gt;TextCNN model was chosen because of its flexibility that allows for a lot more granular tweaking which can help increase performance for our given task.&lt;/p&gt;
 
 &lt;p&gt;The test hypothesis for this project is to check whether this model is able to match the performance of the traditional techniques in their respective data and see how it performs.&lt;/p&gt;
 
@@ -145,8 +145,6 @@ able to learn more effectively.&lt;/p&gt;
 &lt;p&gt;The TextCNN model hyperparameters were tweaked according to Zhang’s paper [&lt;cite&gt;“A Sensitivity Analysis of (and Practitioners’ Guide to) Convolutional Neural Networks for Sentence Classification” Zhang et al.&lt;/cite&gt;] , with GloVe 6B, 300dim vectors.&lt;/p&gt;
 
 &lt;p&gt;Filter Size of 3, 4, 5 was used as it unconditionally yields the best result as shown in the paper. A batch size of 50 was used and a dropout of 0.5 was added to prevent overfitting. The model that we are using here is also double channeled.&lt;/p&gt;
-
-&lt;h3 id=&quot;lstm-classifier&quot;&gt;LSTM Classifier&lt;/h3&gt;
 
 &lt;h2 id=&quot;experiments&quot;&gt;Experiments&lt;/h2&gt;
 
