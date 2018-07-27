@@ -6,9 +6,181 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 25 Jul 2018 02:15:13 -0400</pubDate>
-    <lastBuildDate>Wed, 25 Jul 2018 02:15:13 -0400</lastBuildDate>
+    <pubDate>Thu, 26 Jul 2018 20:12:23 -0400</pubDate>
+    <lastBuildDate>Thu, 26 Jul 2018 20:12:23 -0400</lastBuildDate>
     <generator>Jekyll v3.8.3</generator>
+    
+      <item>
+        <title>Deep Learning Methods for Quotable Text</title>
+        <description>&lt;h5 id=&quot;this-article-was-originally-published-on-dec-5-2017-843-am&quot;&gt;This article was originally published on Dec 5, 2017 8:43 AM.&lt;/h5&gt;
+
+&lt;h3 id=&quot;abstract&quot;&gt;Abstract&lt;/h3&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;The goal of this project is to find out what makes a given sentence more memorable and quotable
+than others. Traditional methods of linguistic analysis have been done historically and they’ve had
+limited sucess. The aim of this project is to find out whether a machine learning solely on its own, is
+able to learn more effectively.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;It is widely known fact that in literature there are some quotes that are more memorable than others. In order to capture this essence of what makes the quote memorable, techniques have been devised based on linguistic expertise to hand pick features that is believed to contribute to making the quote memorable. The limitation of this approach is not only the fact that these generated features scale poorly from dataset to dataset, their performance is also upper-bounded by the quality of the features that are used.&lt;/p&gt;
+
+&lt;p&gt;In this project, I try to overcome some of these limitations by applying a supervised machine learning technique that ‘‘learns’’ what makes the quotes memorable.&lt;/p&gt;
+
+&lt;h2 id=&quot;literature-review&quot;&gt;Literature Review&lt;/h2&gt;
+
+&lt;h4 id=&quot;text-aesthetics-2014&quot;&gt;Text Aesthetics 2014&lt;/h4&gt;
+
+&lt;p&gt;&lt;cite&gt;“Automatic prediction of text aesthetics and interestingness” D Ganguly et al (2014)&lt;/cite&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Used statistical features (discussed below)&lt;/li&gt;
+  &lt;li&gt;Kindle dataset similar to the one I’ve acquired&lt;/li&gt;
+  &lt;li&gt;56% accuracy&lt;/li&gt;
+  &lt;li&gt;A comparative study on Naive Bayes, one class SVM, binary SVM&lt;/li&gt;
+  &lt;li&gt;One class performed best&lt;/li&gt;
+  &lt;li&gt;Used the “mapping convergence” algorithm&lt;/li&gt;
+  &lt;li&gt;They apply SVDD to reduce impact of outliers&lt;/li&gt;
+  &lt;li&gt;Rely on average length of word, positional difference, POS features include adjectives and adverbs, sentiword net distance, and semantic distance.&lt;/li&gt;
+  &lt;li&gt;Used a distance formula extensively, no idea why, only appears in this paper (probably something to do with MC SVM?)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;F(p) = \frac{2}{N*(N-1)}*\sum_{i=1}^N\sum_{j=i+1}^N\frac{d(j) - d(i)}{j-i}&lt;/script&gt;
+
+&lt;h4 id=&quot;bendersky-2012&quot;&gt;Bendersky 2012&lt;/h4&gt;
+
+&lt;p&gt;&lt;cite&gt; “A Dictionary of Wisdom and Wit: Learning to Extract Quotable Phrases” Bendersky et al (2012) &lt;/cite&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;( Most closely resembles the idea I had in mind)&lt;/li&gt;
+  &lt;li&gt;Establishes features used in subsequent works by other people&lt;/li&gt;
+  &lt;li&gt;Basic pipeline involves,&lt;/li&gt;
+  &lt;li&gt;Take a book, feed sentences to Naive Bayes filter that uses log likelihood to reject most of the “unquotable” text.&lt;/li&gt;
+  &lt;li&gt;The naive Bayes filter is trained on external sets of quotes independent of the quotes from the book&lt;/li&gt;
+  &lt;li&gt;The output set of sentences from the NB filter is then fed into a classifier.&lt;/li&gt;
+  &lt;li&gt;Used a quotable language model involving selected lexical, POS and punctuation features.&lt;/li&gt;
+  &lt;li&gt;The model is a unigram  model with sentence likelihood&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Paper strongly focuses on what makes quotable phrase quotable&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Naive Bayes filter
+    &lt;ul&gt;
+      &lt;li&gt;Reduces noise (around 60% of text fed to it from a book is rejected)&lt;/li&gt;
+      &lt;li&gt;High recall is important as that’s the only thing used&lt;/li&gt;
+      &lt;li&gt;Measured by testing against a foreign set of quotable phrases to see how many pass&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Quotable Phrase detection (classifier)
+    &lt;ul&gt;
+      &lt;li&gt;Pass a set of sentences from NB filter to single perceptron layer&lt;/li&gt;
+      &lt;li&gt;Its labelled dataset and is trained using features mentioned above&lt;/li&gt;
+      &lt;li&gt;They use “quotable” classified sentences and post them on /r/Quotes subreddit then average the score to see how well their classifier performs&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;memorability-2012&quot;&gt;Memorability 2012&lt;/h4&gt;
+
+&lt;p&gt;&lt;cite&gt;“You had me at hello: How phrasing affects memorability” Cristian Danescu-Niculescu-Mizil et al (2012).&lt;/cite&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Used a corpus of movie quotes&lt;/li&gt;
+  &lt;li&gt;Also used a corpus of common language (news article) “Brown corpus”.&lt;/li&gt;
+  &lt;li&gt;Use two sets of features: generality and distinctiveness.&lt;/li&gt;
+  &lt;li&gt;Distinctiveness is calculated using likelihood w.r.t the Brown corpus.&lt;/li&gt;
+  &lt;li&gt;Generality is calculated using personal pronouns, indefinite articles, tense etc.&lt;/li&gt;
+  &lt;li&gt;Performed a comparison of %age of memorable and non-memorable quotes that contain the above features&lt;/li&gt;
+  &lt;li&gt;Use 1,2,3-gram Language Models and 1,2,3-gram with POS tagged Language models&lt;/li&gt;
+  &lt;li&gt;Of each quote pair memorable is found 60% of the time to be distinct using their distinctiveness measure&lt;/li&gt;
+  &lt;li&gt;Also included slogans from advertising and ad campaigns&lt;/li&gt;
+  &lt;li&gt;Used distinctiveness metric and generalisability metric&lt;/li&gt;
+  &lt;li&gt;Used SVM to get 60% accuracy, concluded that there is something memorable about these quotes&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;koto-2014&quot;&gt;Koto 2014&lt;/h4&gt;
+&lt;p&gt;&lt;cite&gt; “Memorable spoken quote corpora of TED public speaking” Koto et al (2014) &lt;/cite&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;They crossed the domains of quotability/memorability of text with speech processing&lt;/li&gt;
+  &lt;li&gt;Used TED talk dataset&lt;/li&gt;
+  &lt;li&gt;Popularity of quote is estimated by the amount of “shares” it has on the website&lt;/li&gt;
+  &lt;li&gt;Concluded that there is something that influences memorability of text using F0 metric from INTERSPEECH ‘09&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;koto-2015&quot;&gt;Koto 2015&lt;/h4&gt;
+
+&lt;p&gt;&lt;cite&gt; “A Study On Natural Expressive Speech: Automatic Memorable Spoken Quote Detection” Koto et al (2015) &lt;/cite&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Continuation of 2014 work, added features from Bendersky 2012 to extract quotability&lt;/li&gt;
+  &lt;li&gt;Introduced two new POS features in quote detection&lt;/li&gt;
+  &lt;li&gt;Dropped punctuation features as the data is speech based, added some acoustic features to improve speech processing&lt;/li&gt;
+  &lt;li&gt;Compared Naive Bayes, Neural Networks and SVMs&lt;/li&gt;
+  &lt;li&gt;Used Bendersky 2012’s features on the TED talk data set as baseline performance for the 3 methods&lt;/li&gt;
+  &lt;li&gt;Naive Bayes gets them highest performance,&lt;/li&gt;
+  &lt;li&gt;The feature set gives them 70.4% accuracy over 60% of baseline&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;koto-2016&quot;&gt;Koto 2016&lt;/h4&gt;
+&lt;p&gt;&lt;cite&gt; “Automatic Detection of Memorable Spoken Quotes” Koto et al (2016) &lt;/cite&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Extension of 2015 work, performed some analysis on best features to haveselect.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;method&quot;&gt;Method&lt;/h2&gt;
+&lt;p&gt;At its core, the given task can be formulated as a text classification problem. As such, I plan to employ the traditional methods for text classification and then tweak them for the task at hand. From current literature available literature that compares the performance of these techniques on the standard IMDb dataset, I have chosen TextCNN (using the GloVe embeddings) and an LSTM classifier as focal techniques that will be applied to the problem to see how it compares to the existing techniques discussed above.&lt;/p&gt;
+
+&lt;p&gt;TextCNN model was chosen because of its flexibility that allows for a lot more granular tweaking which can help increase performance for our given task. LSTM Classifier was also used to give another model to compare it to.&lt;/p&gt;
+
+&lt;p&gt;The test hypothesis for this project is to check whether this model is able to match the performance of the traditional techniques in their respective data and see how it performs.&lt;/p&gt;
+
+&lt;p&gt;Traditionally all the papers listed above in the literature review employ a balanced dataset, however this is not indicative of the real-world scenario where quotable text is much rarer than non-quotable text. Hence I have decided to improve on this by testing various amounts of imbalanced datasets (imbalanced in favour of non-quotable text)&lt;/p&gt;
+
+&lt;p&gt;Also since the aim is to create a generalizable model that can be applied to a wide collection of tasks I start with balanced dataset and then see the impact of creating imbalance.&lt;/p&gt;
+
+&lt;p&gt;I test a 50-50 split, a 60-40 split, 70-30 split, 80-20 split and 90-10 split on the generated dataset.&lt;/p&gt;
+
+&lt;h3 id=&quot;textcnn&quot;&gt;TextCNN&lt;/h3&gt;
+
+&lt;p&gt;The TextCNN model hyperparameters were tweaked according to Zhang’s paper [&lt;cite&gt;“A Sensitivity Analysis of (and Practitioners’ Guide to) Convolutional Neural Networks for Sentence Classification” Zhang et al.&lt;/cite&gt;] , with GloVe 6B, 300dim vectors.&lt;/p&gt;
+
+&lt;p&gt;Filter Size of 3, 4, 5 was used as it unconditionally yields the best result as shown in the paper. A batch size of 50 was used and a dropout of 0.5 was added to prevent overfitting. The model that we are using here is also double channeled.&lt;/p&gt;
+
+&lt;h3 id=&quot;lstm-classifier&quot;&gt;LSTM Classifier&lt;/h3&gt;
+
+&lt;h2 id=&quot;experiments&quot;&gt;Experiments&lt;/h2&gt;
+
+&lt;h3 id=&quot;data&quot;&gt;Data&lt;/h3&gt;
+&lt;p&gt;The data used in the experiments are as follows,&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;LitQuotes - around 2300 book quotes were scraped off of LitQuotes.com and paired up with non-quotes from same books available via Project Gutenberg.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Quotationspage.com - 5100 general quotes which are paired with random non-quote newspaper dataset.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Data from Memorability 2012’s paper - 2197 one-sentence memorable quotes paired with surrounding non-memorable quotes from the same movie, spoken by the same character and containing the same number of words.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This gets us around 9,000 pairs of quotes and non-quotes.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 26 Jul 2018 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/natural-language-processing/2018/07/26/deep-learning-methods-for-quotable-text.html</link>
+        <guid isPermaLink="true">http://localhost:4000/natural-language-processing/2018/07/26/deep-learning-methods-for-quotable-text.html</guid>
+        
+        <category>memorable-quotes-project,</category>
+        
+        <category>deep-learning,</category>
+        
+        <category>text-classification</category>
+        
+        
+        <category>natural-language-processing</category>
+        
+      </item>
     
       <item>
         <title>Hello, World!</title>
