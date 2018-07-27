@@ -140,3 +140,39 @@ This gets us around 9,000 pairs of quotes and non-quotes.
 ### Metrics
 
 To measure the sucess of the system, I used F-1 score this was important as due to the skewing of the dataset, accuracy would be a bad indicator of performance as in a 90-10 split, a dumb classifier that predicts one label all the time would also yields a 90% accuracy which doesn't accurately represent the fact that the classifier hasn't learnt any useful feature from our dataset.
+
+### Baselines
+
+The baseline we take is 70.4% which is the best that has been achieved on a similar dataset. Though I have augmented that data set with a substantial amounts of quotes, the paper only has 2000 or so memorable quotes, while in this project I have augmented that to around 9000. This is solely because 2000 quotes is very little for Deep Learning based methods to learn anything meaningful from.
+
+### Performance and Results of the method
+
+* Balanced (50-50) Dataset
+	* F-Score :  0.9417280643
+
+* 60-40 Dataset
+	* F-Score :  0.914163090129
+
+* 70-30 Dataset
+	* F-Score :  0.898954703833
+
+* 80-20 Dataset
+	* F-Score :  0.892349356804
+
+* 90-10 Dataset
+	* F-Score :  0.863253402463
+
+This is a substaintial increase from the baseline, thus proving what I set out to, i.e., deep learning based methods are extremely accurate in discerning the quotability measure of a given sentence. These results support the hypotheis hence, in Future Work, I would like to see what are the additional features that the Deep Learning based methods generate that are able to capture the essence of quotability more accurately than the domain experts.
+
+Note: Since the data for quotable text was limited, during the various higher-order splits, I just increased the amount of non-quotable text to dilute the quotable text data. So a 90-10 split has 74,000 total of quotable and non-quotable text.
+
+## Conclusions
+
+Though one of the main contributing factors that contributed to me choosing TextCNN was its speed and relative ease of implementation, after the experiments it is evident that the CNN is able to perform much better than human generated features for the same classifcation task. As to exactly what more information is a CNN able to extract that the linguists might have overlooked is uncertain, we can make some speculations to conclude what exactly is going on behind the scenes that justifies this performance bump. One of the biggest contributing factor that I would assume would be the GloVe word embeddings, that have a very interesting property of capturing word's meaning numerically. This leads to the CNN understanding the implications of words in a quotable vs a non-quotable text, this combined with the ability of CNNs to auto-generate abstract representations of certain advanced grammatical structures, must have contributed in its ability to yield better results. <cite> "Modeling Interestingness with Deep Neural Networks" Gao, J., Pantel, P., Gamon, M., He, X., & Deng, L. (2014) </cite>
+
+
+## Replicability
+
+In the interest of replicability of the project I will be putting up all the relavant code up on a repository.
+
+Link to the repository:

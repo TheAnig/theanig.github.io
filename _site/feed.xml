@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 26 Jul 2018 20:17:03 -0400</pubDate>
-    <lastBuildDate>Thu, 26 Jul 2018 20:17:03 -0400</lastBuildDate>
+    <pubDate>Thu, 26 Jul 2018 20:24:42 -0400</pubDate>
+    <lastBuildDate>Thu, 26 Jul 2018 20:24:42 -0400</lastBuildDate>
     <generator>Jekyll v3.8.3</generator>
     
       <item>
@@ -170,6 +170,54 @@ able to learn more effectively.&lt;/p&gt;
 &lt;h3 id=&quot;metrics&quot;&gt;Metrics&lt;/h3&gt;
 
 &lt;p&gt;To measure the sucess of the system, I used F-1 score this was important as due to the skewing of the dataset, accuracy would be a bad indicator of performance as in a 90-10 split, a dumb classifier that predicts one label all the time would also yields a 90% accuracy which doesn’t accurately represent the fact that the classifier hasn’t learnt any useful feature from our dataset.&lt;/p&gt;
+
+&lt;h3 id=&quot;baselines&quot;&gt;Baselines&lt;/h3&gt;
+
+&lt;p&gt;The baseline we take is 70.4% which is the best that has been achieved on a similar dataset. Though I have augmented that data set with a substantial amounts of quotes, the paper only has 2000 or so memorable quotes, while in this project I have augmented that to around 9000. This is solely because 2000 quotes is very little for Deep Learning based methods to learn anything meaningful from.&lt;/p&gt;
+
+&lt;h3 id=&quot;performance-and-results-of-the-method&quot;&gt;Performance and Results of the method&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Balanced (50-50) Dataset
+    &lt;ul&gt;
+      &lt;li&gt;F-Score :  0.9417280643&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;60-40 Dataset
+    &lt;ul&gt;
+      &lt;li&gt;F-Score :  0.914163090129&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;70-30 Dataset
+    &lt;ul&gt;
+      &lt;li&gt;F-Score :  0.898954703833&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;80-20 Dataset
+    &lt;ul&gt;
+      &lt;li&gt;F-Score :  0.892349356804&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;90-10 Dataset
+    &lt;ul&gt;
+      &lt;li&gt;F-Score :  0.863253402463&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This is a substaintial increase from the baseline, thus proving what I set out to, i.e., deep learning based methods are extremely accurate in discerning the quotability measure of a given sentence. These results support the hypotheis hence, in Future Work, I would like to see what are the additional features that the Deep Learning based methods generate that are able to capture the essence of quotability more accurately than the domain experts.&lt;/p&gt;
+
+&lt;p&gt;Note: Since the data for quotable text was limited, during the various higher-order splits, I just increased the amount of non-quotable text to dilute the quotable text data. So a 90-10 split has 74,000 total of quotable and non-quotable text.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h2&gt;
+
+&lt;p&gt;Though one of the main contributing factors that contributed to me choosing TextCNN was its speed and relative ease of implementation, after the experiments it is evident that the CNN is able to perform much better than human generated features for the same classifcation task. As to exactly what more information is a CNN able to extract that the linguists might have overlooked is uncertain, we can make some speculations to conclude what exactly is going on behind the scenes that justifies this performance bump. One of the biggest contributing factor that I would assume would be the GloVe word embeddings, that have a very interesting property of capturing word’s meaning numerically. This leads to the CNN understanding the implications of words in a quotable vs a non-quotable text, this combined with the ability of CNNs to auto-generate abstract representations of certain advanced grammatical structures, must have contributed in its ability to yield better results. &lt;cite&gt; “Modeling Interestingness with Deep Neural Networks” Gao, J., Pantel, P., Gamon, M., He, X., &amp;amp; Deng, L. (2014) &lt;/cite&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;replicability&quot;&gt;Replicability&lt;/h2&gt;
+
+&lt;p&gt;In the interest of replicability of the project I will be putting up all the relavant code up on a repository.&lt;/p&gt;
+
+&lt;p&gt;Link to the repository:&lt;/p&gt;
 </description>
         <pubDate>Thu, 26 Jul 2018 00:00:00 -0400</pubDate>
         <link>http://localhost:4000/natural-language-processing/2018/07/26/deep-learning-methods-for-quotable-text.html</link>
