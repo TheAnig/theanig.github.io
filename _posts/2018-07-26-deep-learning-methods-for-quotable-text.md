@@ -173,4 +173,4 @@ Though one of the main contributing factors that contributed to me choosing Text
 
 In the interest of replicability of the project I will be putting up all the relavant code up on a repository.
 
-Link to the repository:
+Link to the repository: [memorable-quotes](https://github.com/TheAnig/memorable-quotes)
