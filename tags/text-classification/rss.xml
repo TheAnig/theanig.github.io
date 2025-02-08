@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+      <title>TheAnig - text-classification</title>
+      <link>https://theanig.github.io</link>
+      <description>This is my own personal corner of the internet</description>
+      <generator>Zola</generator>
+      <language>en</language>
+      <atom:link href="https://theanig.github.io/tags/text-classification/rss.xml" rel="self" type="application/rss+xml"/>
+      <lastBuildDate>Sat, 25 Aug 2018 00:00:00 +0000</lastBuildDate>
+      <item>
+          <title>End-to-end Sequence-Labeling via Bi-directional LSTM CNNs CRF Tutorial</title>
+          <pubDate>Sat, 25 Aug 2018 00:00:00 +0000</pubDate>
+          <author>Anirudh Ganesh</author>
+          <link>https://theanig.github.io/blog/ner-lstm-cnn-icml/</link>
+          <guid>https://theanig.github.io/blog/ner-lstm-cnn-icml/</guid>
+          <description xml:base="https://theanig.github.io/blog/ner-lstm-cnn-icml/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;&#x2F;h2&gt;
+&lt;p&gt;If you’ve ever dipped your toes into natural language processing (NLP), you’ve probably come across tasks like part-of-speech (POS) tagging and named entity recognition (NER). These are the bread and butter of understanding text—things like figuring out whether “Apple” in a sentence refers to a fruit or a tech giant. But let’s be honest, the traditional ways of handling these tasks? Not exactly user-friendly. They usually involve manually crafting features and preprocessing data for hours. It’s tedious, time-consuming, and doesn’t always translate well when you try to apply it to new types of text.&lt;&#x2F;p&gt;
+&lt;p&gt;That’s where a groundbreaking paper from ACL 2016 comes in: End-to-end Sequence Labeling via Bi-directional LSTM-CNNs-CRF by Xuezhe Ma and Eduard Hovy&lt;sup class=&quot;footnote-reference&quot; id=&quot;fr-1-1&quot;&gt;&lt;a href=&quot;#fn-1&quot;&gt;[1]&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;. Don’t let the fancy title scare you—this paper is a game-changer. It proposes a neural network model that completely flips the script on the traditional approach. Instead of hand-picking features, it combines character-level representations (thanks to Convolutional Neural Networks, or CNNs) with word-level context (handled by Bi-directional LSTMs). The cherry on top? A Conditional Random Field (CRF) layer that ties everything together for structured predictions.&lt;&#x2F;p&gt;
+&lt;p&gt;What’s so cool about this? Well, for starters, it’s an end-to-end model, which means it handles the entire process without requiring you to do all that annoying feature engineering. You just give it data, and it learns what it needs—automatically. It’s versatile too, working across a range of sequence labeling tasks.&lt;&#x2F;p&gt;
+&lt;p&gt;And the results? Pretty impressive. This model hit 97.55% accuracy on POS tagging with the Penn Treebank WSJ dataset and scored a solid 91.21% F1 on NER using the CoNLL 2003 dataset. Those are state-of-the-art numbers, by the way.&lt;&#x2F;p&gt;
+&lt;p&gt;Since its debut, this paper has left a big mark on the NLP community. It’s inspired a wave of follow-up research and implementations, all riffing on this idea of combining different neural network components into a single powerful system. This emphasis on end-to-end learning has made sequence labeling faster, easier, and way more adaptable.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;reproducibility&quot;&gt;Reproducibility&lt;&#x2F;h2&gt;
+&lt;p&gt;This is why I took this paper as a good candidate to present for reproducibility&lt;sup class=&quot;footnote-reference&quot; id=&quot;fr-2-1&quot;&gt;&lt;a href=&quot;#fn-2&quot;&gt;[2]&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;It’s a standout example of a complex yet impactful model, combining multiple neural network components into an end-to-end framework. The paper doesn’t just offer strong theoretical contributions; it also provides practical results that have influenced a significant portion of subsequent NLP research. By breaking down the BiLSTM-CNN-CRF model step-by-step, I wanted to demonstrate how a state-of-the-art system could be reproduced with modern tools like PyTorch, ensuring others could verify the results and, ideally, build upon them.&lt;&#x2F;p&gt;
+&lt;p&gt;Reproducibility in this case meant more than just rerunning the experiments—it meant making the implementation accessible, understandable, and adaptable to different use cases. During my preparation, I paid close attention to the potential pain points: ensuring the code was platform-agnostic, tuning hyperparameters to match those used in the paper, and structuring the codebase so others could easily tweak it for related tasks. The aim was to not only replicate the model’s impressive benchmark performance but to encourage further experimentation and adoption by the community.&lt;&#x2F;p&gt;
+&lt;p&gt;At the ICML workshop, this example opened up broader conversations about what it takes to make machine learning research truly reproducible. The discussion often circled back to the tools we use to share code and results. For instance, while frameworks like PyTorch offer flexibility and power, simply uploading a GitHub repository isn’t enough if it lacks proper documentation or doesn’t account for different computational setups. The group also explored the importance of including detailed training procedures and hyperparameter configurations—often overlooked but critical for achieving comparable results.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;tutorial&quot;&gt;Tutorial&lt;&#x2F;h2&gt;
+&lt;blockquote class=&quot;note&quot;&gt;
+	&lt;p class=&quot;alert-title&quot;&gt;
+		&lt;i class=&quot;icon&quot;&gt;&lt;&#x2F;i&gt;Note&lt;&#x2F;p&gt;
+	&lt;p&gt;Feel free to check out the linked repository to follow along with this article to implement your own state of the art NER pipeline&lt;&#x2F;p&gt;
+
+&lt;&#x2F;blockquote&gt;
+&lt;h3 id=&quot;data-preparation&quot;&gt;Data Preparation&lt;&#x2F;h3&gt;
+&lt;p&gt;Before we dive into the model, let’s prepare the data. We’ll use the CoNLL 2003 dataset, which contains text tagged for four types of named entities: PERSON, LOCATION, ORGANIZATION, and MISC.&lt;&#x2F;p&gt;
+&lt;p&gt;The dataset uses the BIO tagging scheme, where:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;B-TYPE indicates the beginning of an entity of type TYPE.&lt;&#x2F;li&gt;
+&lt;li&gt;I-TYPE indicates the continuation of the entity.&lt;&#x2F;li&gt;
+&lt;li&gt;O indicates that the word is not part of any entity.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;For example,&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;mathematica&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-mathematica &quot;&gt;&lt;code class=&quot;language-mathematica&quot; data-lang=&quot;mathematica&quot;&gt;&lt;span&gt;U.N.         NNP  I-NP  I-ORG
+&lt;&#x2F;span&gt;&lt;span&gt;official     NN   I-NP  O
+&lt;&#x2F;span&gt;&lt;span&gt;Ekeus        NNP  I-NP  I-PER
+&lt;&#x2F;span&gt;&lt;span&gt;heads        VBZ  I-VP  O
+&lt;&#x2F;span&gt;&lt;span&gt;for          IN   I-PP  O
+&lt;&#x2F;span&gt;&lt;span&gt;Baghdad      NNP  I-NP  I-LOC
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;We also preprocess the text by replacing all digits with 0. This step ensures that the model focuses on meaningful textual patterns instead of numeric details, which are often irrelevant in NER tasks.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;zero_digits&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;s&lt;&#x2F;span&gt;&lt;span&gt;):
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;re.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sub&lt;&#x2F;span&gt;&lt;span&gt;(&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\\&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;d&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;, &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;, s)
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;load_sentences&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;path&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;zeros&lt;&#x2F;span&gt;&lt;span&gt;):
+&lt;&#x2F;span&gt;&lt;span&gt;    sentences = []
+&lt;&#x2F;span&gt;&lt;span&gt;    sentence = []
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;line &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;in &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;open&lt;&#x2F;span&gt;&lt;span&gt;(path, &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;r&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;encoding&lt;&#x2F;span&gt;&lt;span&gt;=&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;utf-8&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;):
+&lt;&#x2F;span&gt;&lt;span&gt;        line = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;zero_digits&lt;&#x2F;span&gt;&lt;span&gt;(line.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rstrip&lt;&#x2F;span&gt;&lt;span&gt;()) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;zeros &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else &lt;&#x2F;span&gt;&lt;span&gt;line.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rstrip&lt;&#x2F;span&gt;&lt;span&gt;()
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;not line:
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;len&lt;&#x2F;span&gt;&lt;span&gt;(sentence) &amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;                sentences.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(sentence)
+&lt;&#x2F;span&gt;&lt;span&gt;                sentence = []
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;            word = line.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;split&lt;&#x2F;span&gt;&lt;span&gt;()
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;assert &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;len&lt;&#x2F;span&gt;&lt;span&gt;(word) &amp;gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2
+&lt;&#x2F;span&gt;&lt;span&gt;            sentence.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(word)
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;sentences
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;To align with the paper, we convert the tags to the BIOES scheme, which provides finer granularity by adding:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;E-TYPE for the end of an entity.&lt;&#x2F;li&gt;
+&lt;li&gt;S-TYPE for single-token entities.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;iob_iobes&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;tags&lt;&#x2F;span&gt;&lt;span&gt;):
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&amp;quot;&amp;quot;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;    the function is used to convert
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;    BIO -&amp;gt; BIOES tagging
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;    &amp;quot;&amp;quot;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    new_tags = []
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;i, tag &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;in &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;enumerate&lt;&#x2F;span&gt;&lt;span&gt;(tags):
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;tag == &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;O&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;:
+&lt;&#x2F;span&gt;&lt;span&gt;            new_tags.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(tag)
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;elif &lt;&#x2F;span&gt;&lt;span&gt;tag.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;split&lt;&#x2F;span&gt;&lt;span&gt;(&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;)[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;] == &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;B&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;:
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;i + &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1 &lt;&#x2F;span&gt;&lt;span&gt;!= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;len&lt;&#x2F;span&gt;&lt;span&gt;(tags) and \
+&lt;&#x2F;span&gt;&lt;span&gt;               tags[i + &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;].&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;split&lt;&#x2F;span&gt;&lt;span&gt;(&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;)[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;] == &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;I&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;:
+&lt;&#x2F;span&gt;&lt;span&gt;                new_tags.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(tag)
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;                new_tags.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(tag.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;replace&lt;&#x2F;span&gt;&lt;span&gt;(&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;B-&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;, &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;S-&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;))
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;elif &lt;&#x2F;span&gt;&lt;span&gt;tag.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;split&lt;&#x2F;span&gt;&lt;span&gt;(&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;)[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;] == &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;I&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;:
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;i + &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1 &lt;&#x2F;span&gt;&lt;span&gt;&amp;lt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;len&lt;&#x2F;span&gt;&lt;span&gt;(tags) and \
+&lt;&#x2F;span&gt;&lt;span&gt;                    tags[i + &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;].&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;split&lt;&#x2F;span&gt;&lt;span&gt;(&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;)[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;] == &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;I&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;:
+&lt;&#x2F;span&gt;&lt;span&gt;                new_tags.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(tag)
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;                new_tags.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(tag.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;replace&lt;&#x2F;span&gt;&lt;span&gt;(&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;I-&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;, &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;E-&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;))
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;raise &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Exception&lt;&#x2F;span&gt;&lt;span&gt;(&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Invalid IOB format!&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;)
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;new_tags
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;mappings-and-word-embeddings&quot;&gt;Mappings and Word Embeddings&lt;&#x2F;h3&gt;
+&lt;p&gt;To train our model, we need to convert words, characters, and tags into numeric representations. This mapping allows us to leverage efficient matrix operations in PyTorch. For word embeddings, we use pre-trained GloVe vectors (100-dimensional) trained on Wikipedia and Gigaword data. These embeddings provide a semantic representation of words, which significantly boosts the model’s performance.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span&gt;word_to_id, id_to_word = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;create_mapping&lt;&#x2F;span&gt;&lt;span&gt;(train_sentences)
+&lt;&#x2F;span&gt;&lt;span&gt;char_to_id, id_to_char = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;create_mapping&lt;&#x2F;span&gt;&lt;span&gt;(train_sentences, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;level&lt;&#x2F;span&gt;&lt;span&gt;=&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;char&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;)
+&lt;&#x2F;span&gt;&lt;span&gt;tag_to_id, id_to_tag = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;create_mapping&lt;&#x2F;span&gt;&lt;span&gt;(train_sentences, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;level&lt;&#x2F;span&gt;&lt;span&gt;=&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;tag&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;We also load GloVe embeddings into a matrix and initialize missing embeddings randomly:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span&gt;word_embeds = np.random.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;uniform&lt;&#x2F;span&gt;&lt;span&gt;(-np.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sqrt&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0.06&lt;&#x2F;span&gt;&lt;span&gt;), np.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sqrt&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0.06&lt;&#x2F;span&gt;&lt;span&gt;), (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;len&lt;&#x2F;span&gt;&lt;span&gt;(word_to_id), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;100&lt;&#x2F;span&gt;&lt;span&gt;))
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;word &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;in &lt;&#x2F;span&gt;&lt;span&gt;word_to_id:
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;word in glove_embeds:
+&lt;&#x2F;span&gt;&lt;span&gt;        word_embeds[word_to_id[word]] = glove_embeds[word]
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;model-architecture&quot;&gt;Model Architecture&lt;&#x2F;h3&gt;
+&lt;p&gt;The BiLSTM-CNN-CRF model has three main components:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;CNN for Character Embeddings: Generates a character-level representation for each word using convolutional and max-pooling layers. This step captures morphological patterns like prefixes and suffixes.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;BiLSTM for Word Encoding: Combines word embeddings (GloVe + character embeddings) and processes them bidirectionally. This helps capture context from both the left and right of each word.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;CRF for Structured Prediction: Ensures that predictions respect tagging constraints (e.g., I-ORG cannot follow I-PER).&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;The model that we are presenting is a complicated one, since its a hybridized network using LSTMs and CNNs. So in order to break down the complexity, we have attempted to simplify the process by splitting up operations into individual functions that we can go over part by part. This hopefully makes the whole thing more easily digestable and gives a more intuitive understanding of the whole process.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;initialization-of-weights&quot;&gt;Initialization of weights&lt;&#x2F;h4&gt;
+&lt;p&gt;We start with the init_embedding function, which just initializes the embedding layer by pooling from a random sample.&lt;&#x2F;p&gt;
+&lt;p&gt;The distribution is pooled from $-\sqrt{\frac{3}{V}}$ to $+\sqrt{\frac{3}{V}}$ where $V$ is the embedding dimension size.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span&gt;    bias = np.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sqrt&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;3.0 &lt;&#x2F;span&gt;&lt;span&gt;&#x2F; input_embedding.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;size&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;))
+&lt;&#x2F;span&gt;&lt;span&gt;    nn.init.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;uniform&lt;&#x2F;span&gt;&lt;span&gt;(input_embedding, -bias, bias)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The LSTM layers are initialized by uniform sampling from $-\sqrt{\frac{6}{r + c}}$ to $+\sqrt{\frac{6}{r + c}}$. Where $r$ is the number of rows, $c$ is the number of columns (based on the shape of the weight matrix).&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span&gt;    bias = np.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sqrt&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;6.0 &lt;&#x2F;span&gt;&lt;span&gt;&#x2F; (input_linear.weight.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;size&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;) + input_linear.weight.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;size&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;)))
+&lt;&#x2F;span&gt;&lt;span&gt;    nn.init.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;uniform&lt;&#x2F;span&gt;&lt;span&gt;(input_linear.weight, -bias, bias)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h4 id=&quot;crf-layer&quot;&gt;CRF Layer&lt;&#x2F;h4&gt;
+&lt;p&gt;We have two options:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;softmax&lt;&#x2F;strong&gt;: normalize the scores into a vector such that can be interpreted as the probability that the word belongs to class. Eventually, the probability of a sequence of tag $y$ is the product of all tags.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;linear-chain CRF&lt;&#x2F;strong&gt;: the first method makes local choices. In other words, even if we capture some information from the context thanks to the bi-LSTM, the tagging decision is still local. We don’t make use of the neighbooring tagging decisions. Given a sequence of words $w_1, …, w_m$, a sequence of score vectors
+$s_1, …, s_m$ and a sequence of tags $y_1, …, y_m$, a linear-chain CRF defines a global score $C \in \R$ such that&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;$$
+C(y_1, …, y_m) = b[y_1] + \sum_{t=1}^m s_t[y_t] + \sum_{t=1}^{m-1}T[y_t, y_{t+1}] + e[y_m]
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;where $T$ is a transition matrix in $\R^{9x9}$ and $e, b \in \R^9$ are vectors of scores that capture the cost of beginning or ending with a given tag. The use of the matrix $T$ captures linear (one step) dependencies between tagging decisions.&lt;&#x2F;p&gt;
+&lt;p&gt;The motivation behind CRFs was to generate sentence level likelihoods for optimal tags. What that means is for each word we estimate maximum likelihood and then we use the Viterbi algorithm to decode the tag sequence optimally.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Advantages of CRF over Softmax:&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Softmax doesn’t value any dependencies, this is a problem since NER the context heavily influences the tag that is assigned. This is solved by applying CRF as it takes into account the full sequence to assign the tag.&lt;&#x2F;li&gt;
+&lt;li&gt;Example: I-ORG cannot directly follow I-PER.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;figure&gt;
+&lt;img class=&quot;&quot;alt=&quot;A simple CRF network&quot;src=&quot;simple_crf_network.svg&quot;&#x2F;&gt;
+&lt;figcaption&gt;
+A simple CRF network
+&lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;p&gt;The figure shows a simple CRF network, in our case we have the inputs feeding in from our BiLSTMs, but otherwise the structure largely remains the same.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;score-calculation&quot;&gt;Score Calculation&lt;&#x2F;h4&gt;
+&lt;p&gt;CRF computes a conditional probability. Let $y$ be a tag sequence and x an input of sequence of words. Then we compute
+$$
+P(y|x) = \frac{exp(Score(x, y))}{\sum_{y’}exp(Score(x, y’))}
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;Where the score is determined by defining some log potentials $log\psi_i(x, y)$ such that
+$$
+Score(x, y) = \sum_i log\psi_i(x, y)
+$$&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;log_sum_exp&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;vec&lt;&#x2F;span&gt;&lt;span&gt;):
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&amp;#39;&amp;#39;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;    This function calculates the score explained above for the forward algorithm
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;    vec 2D: 1 * tagset_size
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;    &amp;#39;&amp;#39;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span&gt;    max_score = vec[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;argmax&lt;&#x2F;span&gt;&lt;span&gt;(vec)]
+&lt;&#x2F;span&gt;&lt;span&gt;    max_score_broadcast = max_score.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;view&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;, -&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;expand&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;, vec.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;size&lt;&#x2F;span&gt;&lt;span&gt;()[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;])
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;max_score + torch.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;log&lt;&#x2F;span&gt;&lt;span&gt;(torch.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sum&lt;&#x2F;span&gt;&lt;span&gt;(torch.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;exp&lt;&#x2F;span&gt;&lt;span&gt;(vec - max_score_broadcast)))
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This is the score function for our sentences. This function takes a list of ground truths that tell us what the corresponding tags are and the features which contains the supposed tagged parts of the function. Which is then used to compute the score.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;score_sentences&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;feats&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;tags&lt;&#x2F;span&gt;&lt;span&gt;):
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# tags is ground_truth, a list of ints, length is len(sentence)
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# feats is a 2D tensor, len(sentence) * tagset_size
+&lt;&#x2F;span&gt;&lt;span&gt;    r = torch.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;LongTensor&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;range&lt;&#x2F;span&gt;&lt;span&gt;(feats.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;size&lt;&#x2F;span&gt;&lt;span&gt;()[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;]))
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.use_gpu:
+&lt;&#x2F;span&gt;&lt;span&gt;        r = r.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cuda&lt;&#x2F;span&gt;&lt;span&gt;()
+&lt;&#x2F;span&gt;&lt;span&gt;        pad_start_tags = torch.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cat&lt;&#x2F;span&gt;&lt;span&gt;([torch.cuda.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;LongTensor&lt;&#x2F;span&gt;&lt;span&gt;([&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.tag_to_ix[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;START_TAG&lt;&#x2F;span&gt;&lt;span&gt;]]), tags])
+&lt;&#x2F;span&gt;&lt;span&gt;        pad_stop_tags = torch.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cat&lt;&#x2F;span&gt;&lt;span&gt;([tags, torch.cuda.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;LongTensor&lt;&#x2F;span&gt;&lt;span&gt;([&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.tag_to_ix[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;STOP_TAG&lt;&#x2F;span&gt;&lt;span&gt;]])])
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;        pad_start_tags = torch.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cat&lt;&#x2F;span&gt;&lt;span&gt;([torch.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;LongTensor&lt;&#x2F;span&gt;&lt;span&gt;([&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.tag_to_ix[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;START_TAG&lt;&#x2F;span&gt;&lt;span&gt;]]), tags])
+&lt;&#x2F;span&gt;&lt;span&gt;        pad_stop_tags = torch.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cat&lt;&#x2F;span&gt;&lt;span&gt;([tags, torch.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;LongTensor&lt;&#x2F;span&gt;&lt;span&gt;([&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.tag_to_ix[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;STOP_TAG&lt;&#x2F;span&gt;&lt;span&gt;]])])
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    score = torch.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sum&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.transitions[pad_stop_tags, pad_start_tags]) + torch.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sum&lt;&#x2F;span&gt;&lt;span&gt;(feats[r, tags])
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;score
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h4 id=&quot;viterbi-decode&quot;&gt;Viterbi decode&lt;&#x2F;h4&gt;
+&lt;p&gt;Viterbi decode is basically applying dynamic programming to choosing our tag sequence. Let’s suppose that we have the solution&lt;&#x2F;p&gt;
+&lt;p&gt;$$ \tilde s_t(y_t) = argmax_{y_t, …, y_m} C(y_t, …, y_m) = argmax_{y_{t+1}}s_t[y_t] + T[y_t, y_{t+1}] + \tilde s_{t+1}(y^{t+1}) $$&lt;&#x2F;p&gt;
+&lt;p&gt;Then, we can easily define the probability of a given sequence of tags as&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+\mathbb{P}(y_1, …, y_m) = \frac{e^{C(y_t, …, y_m)}}{Z}
+$$&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;forward_calc&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sentence&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;chars&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;chars2_length&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;d&lt;&#x2F;span&gt;&lt;span&gt;):
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&amp;#39;&amp;#39;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;    The function calls viterbi decode and generates the
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;    most probable sequence of tags for the sentence
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;    &amp;#39;&amp;#39;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Get the emission scores from the BiLSTM
+&lt;&#x2F;span&gt;&lt;span&gt;    feats = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;_get_lstm_features&lt;&#x2F;span&gt;&lt;span&gt;(sentence, chars, chars2_length, d)
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# viterbi to get tag_seq
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Find the best path, given the features.
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.use_crf:
+&lt;&#x2F;span&gt;&lt;span&gt;        score, tag_seq = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;viterbi_decode&lt;&#x2F;span&gt;&lt;span&gt;(feats)
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;        score, tag_seq = torch.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;max&lt;&#x2F;span&gt;&lt;span&gt;(feats, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;        tag_seq = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;list&lt;&#x2F;span&gt;&lt;span&gt;(tag_seq.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cpu&lt;&#x2F;span&gt;&lt;span&gt;().data)
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;score, tag_seq
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;model-details&quot;&gt;Model Details&lt;&#x2F;h3&gt;
+&lt;h4 id=&quot;cnn-model-for-generating-character-embeddings&quot;&gt;CNN model for generating character embeddings&lt;&#x2F;h4&gt;
+&lt;p&gt;Consider the word ‘cat’, we pad it on both ends to get our maximum word length ( this is mainly an implementation quirk since we can’t have variable length layers at run time, our algorithm will ignore the pads).&lt;&#x2F;p&gt;
+&lt;figure&gt;
+&lt;img class=&quot;&quot;alt=&quot;Convolution Model for generating character embeddings&quot;src=&quot;convolution_model_details.svg&quot;&#x2F;&gt;
+&lt;figcaption&gt;
+    Convolution Model for generating character embeddings
+&lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+We then apply a convolution layer on top that generates spatial coherence across characters, we use a maxpool to extract meaningful features out of our convolution layer. This now gives us a dense vector representation of each word. This representation will be concatenated with the pre-trained GloVe embeddings using a simple lookup.
+&lt;p&gt;This snippet shows us how the CNN is implemented in pytorch&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.char_cnn3 = nn.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Conv2d&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;in_channels&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;out_channels&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.out_channels, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;kernel_size&lt;&#x2F;span&gt;&lt;span&gt;=(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span&gt;, char_embedding_dim), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;padding&lt;&#x2F;span&gt;&lt;span&gt;=(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;))
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h4 id=&quot;lstm-model-that-generates-tags-for-the-given-sequence&quot;&gt;LSTM model that generates tags for the given sequence&lt;&#x2F;h4&gt;
+&lt;p&gt;The word-embeddings( glove+char embedding ) that we generated above, we feed to a bi-directional LSTM model. The LSTM model has 2 layers,&lt;&#x2F;p&gt;
+&lt;figure&gt;
+&lt;img class=&quot;&quot;alt=&quot;LSTMs for Tag Generation&quot;src=&quot;lstm_based_tag_generation.svg&quot;&#x2F;&gt;
+&lt;figcaption&gt;
+    LSTMs for Tag Generation
+&lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The forward layer takes in a sequence of word vectors and generates a new vector based on what it has seen so far in the forward direction (starting from the start word up until current word) this vector can be thought of as a summary of all the words it has seen.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;The backwards layer does the same but in opposite direction, i.e., from the end of the sentence to the current word.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;The forward vector and the backwards vector at current word concatanate to generate a unified representation.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;This snippet shows us how the BiLSTM is implemented in pytorch&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.lstm = nn.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;LSTM&lt;&#x2F;span&gt;&lt;span&gt;(embedding_dim+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.out_channels, hidden_dim, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;bidirectional&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;True&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h4 id=&quot;main-model-implementation&quot;&gt;Main Model Implementation&lt;&#x2F;h4&gt;
+&lt;p&gt;The get_lstm_features function returns the LSTM’s tag vectors. The function performs all the steps mentioned above for the model.&lt;&#x2F;p&gt;
+&lt;p&gt;Steps:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;It takes in characters, converts them to embeddings using our character CNN.&lt;&#x2F;li&gt;
+&lt;li&gt;We concat Character Embeeding with glove vectors, use this as features that we feed to Bidirectional-LSTM.&lt;&#x2F;li&gt;
+&lt;li&gt;The Bidirectional-LSTM generates outputs based on these set of features.&lt;&#x2F;li&gt;
+&lt;li&gt;The output are passed through a linear layer to convert to tag space&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.char_mode == &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;LSTM&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;:
+&lt;&#x2F;span&gt;&lt;span&gt;    chars_embeds = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;char_embeds&lt;&#x2F;span&gt;&lt;span&gt;(chars2).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;transpose&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;    packed = torch.nn.utils.rnn.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pack_padded_sequence&lt;&#x2F;span&gt;&lt;span&gt;(chars_embeds, chars2_length)
+&lt;&#x2F;span&gt;&lt;span&gt;    lstm_out, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;_ &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;char_lstm&lt;&#x2F;span&gt;&lt;span&gt;(packed)
+&lt;&#x2F;span&gt;&lt;span&gt;    outputs, output_lengths = torch.nn.utils.rnn.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pad_packed_sequence&lt;&#x2F;span&gt;&lt;span&gt;(lstm_out)
+&lt;&#x2F;span&gt;&lt;span&gt;    outputs = outputs.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;transpose&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;    chars_embeds_temp = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Variable&lt;&#x2F;span&gt;&lt;span&gt;(torch.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;FloatTensor&lt;&#x2F;span&gt;&lt;span&gt;(torch.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;zeros&lt;&#x2F;span&gt;&lt;span&gt;((outputs.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;size&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;), outputs.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;size&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;)))))
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.use_gpu:
+&lt;&#x2F;span&gt;&lt;span&gt;        chars_embeds_temp = chars_embeds_temp.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cuda&lt;&#x2F;span&gt;&lt;span&gt;()
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;i, index &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;in &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;enumerate&lt;&#x2F;span&gt;&lt;span&gt;(output_lengths):
+&lt;&#x2F;span&gt;&lt;span&gt;        chars_embeds_temp[i] = torch.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cat&lt;&#x2F;span&gt;&lt;span&gt;((outputs[i, index-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;, :&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.char_lstm_dim], outputs[i, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.char_lstm_dim:]))
+&lt;&#x2F;span&gt;&lt;span&gt;    chars_embeds = chars_embeds_temp.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;clone&lt;&#x2F;span&gt;&lt;span&gt;()
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;i &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;in &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;range&lt;&#x2F;span&gt;&lt;span&gt;(chars_embeds.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;size&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;)):
+&lt;&#x2F;span&gt;&lt;span&gt;        chars_embeds[d[i]] = chars_embeds_temp[i]
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.char_mode == &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;CNN&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;:
+&lt;&#x2F;span&gt;&lt;span&gt;    chars_embeds = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;char_embeds&lt;&#x2F;span&gt;&lt;span&gt;(chars2).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;unsqueeze&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;## Creating Character level representation using Convolutional Neural Netowrk
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;## followed by a Maxpooling Layer
+&lt;&#x2F;span&gt;&lt;span&gt;    chars_cnn_out3 = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;char_cnn3&lt;&#x2F;span&gt;&lt;span&gt;(chars_embeds)
+&lt;&#x2F;span&gt;&lt;span&gt;    chars_embeds = nn.functional.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;max_pool2d&lt;&#x2F;span&gt;&lt;span&gt;(chars_cnn_out3,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;kernel_size&lt;&#x2F;span&gt;&lt;span&gt;=(chars_cnn_out3.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;size&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;)).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;view&lt;&#x2F;span&gt;&lt;span&gt;(chars_cnn_out3.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;size&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.out_channels)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;training-the-model&quot;&gt;Training the model&lt;&#x2F;h3&gt;
+&lt;p&gt;We train the model using stochastic gradient descent (SGD) with a learning rate of 0.015 and momentum of 0.9. To avoid overfitting, we apply dropout and use gradient clipping&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span&gt;optimizer = torch.optim.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;SGD&lt;&#x2F;span&gt;&lt;span&gt;(model.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;parameters&lt;&#x2F;span&gt;&lt;span&gt;(), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;lr&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0.015&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;momentum&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0.9&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;We also calculate the negative log-likelihood as our loss function:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;neg_log_likelihood&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sentence&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;tags&lt;&#x2F;span&gt;&lt;span&gt;):
+&lt;&#x2F;span&gt;&lt;span&gt;    feats = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;get_lstm_features&lt;&#x2F;span&gt;&lt;span&gt;(sentence)
+&lt;&#x2F;span&gt;&lt;span&gt;    forward_score = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;forward_algorithm&lt;&#x2F;span&gt;&lt;span&gt;(feats)
+&lt;&#x2F;span&gt;&lt;span&gt;    gold_score = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;score_sentence&lt;&#x2F;span&gt;&lt;span&gt;(feats, tags)
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;forward_score - gold_score
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;evaluation-and-testing&quot;&gt;Evaluation and Testing&lt;&#x2F;h3&gt;
+&lt;p&gt;After training, we evaluate the model using precision, recall, and F1-score. Here’s an example of the model tagging new sentences:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span&gt;sentence = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Jay is from India.&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;prediction = model.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;predict&lt;&#x2F;span&gt;&lt;span&gt;(sentence)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;print&lt;&#x2F;span&gt;&lt;span&gt;(prediction)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This gives us the output:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;yaml&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-yaml &quot;&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Jay &lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;PER
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;is &lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;NA
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;from &lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;NA
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;India &lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;LOC
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;… and that’s it! That gets us a state of the art NER pipeline!&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;closing-thoughts&quot;&gt;Closing Thoughts&lt;&#x2F;h2&gt;
+&lt;p&gt;Presenting this work at the workshop was an incredibly rewarding experience. It wasn’t just about showcasing the BiLSTM-CNN-CRF model or diving into the nitty-gritty of the implementation details in PyTorch, but seeing researchers and practitioners engage with this tutorial, ask thoughtful questions, and discuss their own challenges made all the preparation worth it.&lt;&#x2F;p&gt;
+&lt;p&gt;If you have any thoughts, questions, or feedback, feel free to reach out—I’d love to hear from you!&lt;&#x2F;p&gt;
+&lt;blockquote class=&quot;note&quot;&gt;
+	&lt;p class=&quot;alert-title&quot;&gt;
+		&lt;i class=&quot;icon&quot;&gt;&lt;&#x2F;i&gt;Note&lt;&#x2F;p&gt;
+	&lt;p&gt;The work in this article was presented at ICML 2018, MLTrain Workshop “Enabling Reproducability in Machine Learning”.&lt;&#x2F;p&gt;
+
+&lt;&#x2F;blockquote&gt;
+&lt;hr&gt;&lt;ol class=&quot;footnotes-list&quot;&gt;
+&lt;li id=&quot;fn-1&quot;&gt;
+&lt;p&gt;Link to the original paper: &lt;a href=&quot;https:&#x2F;&#x2F;aclanthology.org&#x2F;P16-1101&#x2F;&quot;&gt;End-to-end Sequence Labeling via Bi-directional LSTM-CNNs-CRF&lt;&#x2F;a&gt; &lt;a href=&quot;#fr-1-1&quot;&gt;↩&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li id=&quot;fn-2&quot;&gt;
+&lt;p&gt;Link to the repository: &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;TheAnig&#x2F;NER-LSTM-CNN-Pytorch&quot;&gt;NER-LSTM-CNN-Pytorch&lt;&#x2F;a&gt; &lt;a href=&quot;#fr-2-1&quot;&gt;↩&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+</description>
+      </item>
+      <item>
+          <title>Deep Learning Methods for Quotable Text</title>
+          <pubDate>Thu, 26 Jul 2018 00:00:00 +0000</pubDate>
+          <author>Anirudh Ganesh</author>
+          <link>https://theanig.github.io/blog/deep-learning-for-memorable-quotes/</link>
+          <guid>https://theanig.github.io/blog/deep-learning-for-memorable-quotes/</guid>
+          <description xml:base="https://theanig.github.io/blog/deep-learning-for-memorable-quotes/">&lt;h2 id=&quot;abstract&quot;&gt;Abstract&lt;&#x2F;h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The goal of this study is to find out what makes a given sentence more memorable and quotable
+than others. Traditional methods of linguistic analysis have been done historically and they’ve had
+limited sucess. The aim of this study is to find out whether a machine learning solely on its own, is
+able to learn more effectively.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+</description>
+      </item>
+    </channel>
+</rss>

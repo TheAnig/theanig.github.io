@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>TheAnig - machine-learning</title>
+    <subtitle>This is my own personal corner of the internet</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://theanig.github.io/tags/machine-learning/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://theanig.github.io"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2018-12-06T00:00:00+00:00</updated>
+    <id>https://theanig.github.io/tags/machine-learning/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Using Fractals for feature extraction in image classification tasks</title>
+        <published>2018-12-06T00:00:00+00:00</published>
+        <updated>2018-12-06T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Anirudh Ganesh
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://theanig.github.io/blog/hilbert-curve-svm/"/>
+        <id>https://theanig.github.io/blog/hilbert-curve-svm/</id>
+        
+        <content type="html" xml:base="https://theanig.github.io/blog/hilbert-curve-svm/">&lt;blockquote class=&quot;caution&quot;&gt;
+	&lt;p class=&quot;alert-title&quot;&gt;
+		&lt;i class=&quot;icon&quot;&gt;&lt;&#x2F;i&gt;Caution&lt;&#x2F;p&gt;
+	&lt;ul&gt;
+&lt;li&gt;explain wavelet transforms&lt;&#x2F;li&gt;
+&lt;li&gt;rearrange hilberts curve in the explanationor the article&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+
+&lt;&#x2F;blockquote&gt;
+&lt;h2 id=&quot;introduction-rethinking-feature-extraction-with-fractals&quot;&gt;Introduction: Rethinking Feature Extraction with Fractals&lt;&#x2F;h2&gt;
+&lt;p&gt;Feature extraction is at the core of image classification, a task that has seen groundbreaking advancements thanks to convolutional neural networks (CNNs). These models have revolutionized computer vision by leveraging spatial coherence to extract patterns, enabling machines to distinguish cats from dogs, recognize handwritten digits, and even detect tumors in medical scans. However, as powerful as CNNs are, they come with limitations—particularly their reliance on convolution operations, which are heavily tuned for two-dimensional data.&lt;&#x2F;p&gt;
+&lt;p&gt;What if there were an alternative to convolutions?
+One that could preserve spatial relationships while offering a fresh perspective on how we process and interpret image data?
+Enter fractals, the infinitely complex, self-replicating structures that bridge mathematics and nature.
+In this blog post, I’ll explore how fractal geometry, specifically the Hilbert curve, can provide a novel approach to feature extraction.&lt;&#x2F;p&gt;
+&lt;p&gt;This method reimagines image processing by transforming pixel data into a dense, one-dimensional representation using fractal-based mappings. Unlike traditional techniques, it takes advantage of the Hilbert curve’s ability to preserve locality and scale across resolutions, making it ideal for compact, efficient feature representation. Combined with wavelet transforms, which localize features in the frequency domain, this fractal-based approach opens up exciting possibilities for image classification and beyond.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;fractals-a-brief-overview&quot;&gt;Fractals: A brief overview&lt;&#x2F;h2&gt;
+&lt;p&gt;A fractal is an abstract object used to describe and simulate naturally occurring objects. The proper definition of a fractal, at least as Mandelbrot wrote it, is a shape whose “Hausdorff dimension” is greater than its “topological dimension”.
+Topological dimension is something that’s always an integer, wherein (loosely speaking) curve-ish things are 1-dimensional, surface-ish things are two-dimensional, etc. For example, a Koch Curve has topological dimension 1, and Hausdorff dimension 1.262. A rough surfaces might have topological dimension 2, but fractal dimension 2.3. And if a curve with topological dimension 1 has a Hausdorff dimension that happens to be exactly 2, or 3, or 4, etc., it would be considered a fractal, even though it’s fractal dimension is an integer.&lt;&#x2F;p&gt;
+&lt;p&gt;For purposes of my method we can simplify our view of fractal as essentially a never-ending pattern.
+But even under fractals, there is a special set of self-similar fractals. These are rendered by repeating a simple process. The interesting property about fractals is that they exist in non-whole number dimensions, as discussed above (The Hausdorff dimension). This property is super-useful as this means that they effectively encode information from a non-primary dimension, a fact that was used extensively for lossy image compression.&lt;&#x2F;p&gt;
+&lt;p&gt;We can use to our advantage this property to capture spatial, temporal or higher dimensional relation- ships in form of useful features that can be localized. (Using something like a Fourier transform or as in our case, wavelet transform)&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;space-filling-curves-and-practical-applications&quot;&gt;Space-Filling Curves and Practical Applications&lt;&#x2F;h2&gt;
+&lt;p&gt;Before diving into the technicalities, let’s talk about space-filling curves. These are mathematical constructions that, despite their counterintuitive nature, are immensely useful. A space-filling curve is a line that weaves through every point in a two-dimensional (or higher-dimensional) space. One famous example is the Hilbert curve, which can be visualized as a fractal that becomes progressively more intricate at higher resolutions.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;bridging-infinite-and-finite-realities&quot;&gt;Bridging Infinite and Finite Realities&lt;&#x2F;h3&gt;
+&lt;p&gt;Space-filling curves address a philosophical question central to mathematics: How can results based on infinite concepts be useful in our finite world? The Hilbert curve provides a fascinating answer. It starts as a theoretical construct, existing in an infinite, continuous mathematical space. But its finite approximations—pseudo-Hilbert curves—serve practical purposes, such as translating images into sound or encoding spatial information into dense, one-dimensional representations.&lt;&#x2F;p&gt;
+&lt;figure&gt;
+&lt;img class=&quot;&quot;alt=&quot;Example of a fractal&quot;src=&quot;mandelbrot_set.jpg&quot;&#x2F;&gt;
+&lt;figcaption&gt;
+The Mandelbrot set: its boundary is a fractal curve with Hausdorff dimension 2. Courtesy of Wikipedia
+&lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;p&gt;Let me illustrate with an example: Imagine developing a device that helps people “see with their ears.” The device takes data from a camera, translates it into sound, and lets users interpret spatial information through auditory cues. In this setup, the Hilbert curve provides a way to map 2D image data (pixels) into a 1D frequency space, preserving spatial relationships between pixels while creating a coherent auditory representation.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;fractals-in-feature-extraction-the-proposed-methodology&quot;&gt;Fractals in Feature Extraction: The Proposed Methodology&lt;&#x2F;h2&gt;
+&lt;p&gt;Fractals, with their self-similar and infinitely intricate structures, provide a powerful framework for extracting meaningful features from complex datasets like images &lt;sup class=&quot;footnote-reference&quot; id=&quot;fr-2-1&quot;&gt;&lt;a href=&quot;#fn-2&quot;&gt;[1]&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;. The goal is to transform 2D image data into a dense, 1D representation that preserves spatial relationships and is optimized for computational efficiency. This section breaks down the methodology into three key components: mapping pixels to frequencies, employing the Hilbert curve for serialization, and leveraging wavelet transforms for localization and compression.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;from-pixels-to-frequencies-bridging-the-dimensions&quot;&gt;From Pixels to Frequencies: Bridging the Dimensions&lt;&#x2F;h3&gt;
+&lt;p&gt;At the heart of the method is the challenge of mapping two-dimensional pixel data to a one-dimensional frequency domain.
+Each pixel is associated with a frequency, and its intensity determines the loudness of that frequency in the resulting signal.
+This transformation enables image data to be represented as a superposition of frequencies, much like a musical composition where different instruments (frequencies) contribute to the overall sound &lt;sup class=&quot;footnote-reference&quot; id=&quot;fr-1-1&quot;&gt;&lt;a href=&quot;#fn-1&quot;&gt;[2]&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;The challenge lies in ensuring that this mapping preserves spatial coherence. Pixels that are close together in the original image should remain close in the frequency representation &lt;sup class=&quot;footnote-reference&quot; id=&quot;fr-3-1&quot;&gt;&lt;a href=&quot;#fn-3&quot;&gt;[3]&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;. This is critical for maintaining the integrity of spatial relationships, which are often key to successful image classification. Without this coherence, the resulting representation would lose its ability to accurately capture the structure of the original image.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;comparing-space-filling-curves&quot;&gt;Comparing Space Filling Curves&lt;&#x2F;h2&gt;
+&lt;p&gt;Space-filling curves provide a structured way to map multi-dimensional data into one-dimensional representations while attempting to preserve spatial locality. However, not all space-filling curves are created equal. When choosing a curve for applications like image feature extraction, it’s crucial to evaluate their performance in preserving spatial relationships. Let’s compare three popular curves: the Z-curve, the Peano curve, and the Hilbert curve. &lt;sup class=&quot;footnote-reference&quot; id=&quot;fr-7-1&quot;&gt;&lt;a href=&quot;#fn-7&quot;&gt;[4]&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;the-z-curve&quot;&gt;The Z-Curve&lt;&#x2F;h3&gt;
+&lt;aside&gt;
+&lt;img class=&quot;&quot;alt=&quot;Example of a Z curve&quot;src=&quot;zcurve.png&quot;&#x2F;&gt;
+&lt;&#x2F;aside&gt;
+The Z-curve, or Morton order, follows a zig-zag pattern that makes it simple to implement but poor at preserving spatial relationships. In 2D, the Z-curve introduces significant gaps, with many adjacent points in the sequence mapping to coordinates that are far apart in the original space. This results in an average displacement for unit edges exceeding 1.6 in 2D and 1.35 in higher dimensions, making it unsuitable for applications requiring strong locality preservation.
+&lt;h3 id=&quot;peano-curve&quot;&gt;Peano Curve&lt;&#x2F;h3&gt;
+&lt;aside&gt;
+&lt;img class=&quot;&quot;alt=&quot;Example of a Peano curve&quot;src=&quot;peano.png&quot;&#x2F;&gt;
+&lt;&#x2F;aside&gt;
+The Peano curve, in contrast, is much better at maintaining spatial coherence. By mapping scalar unit lengths in 1D to unit Euclidean lengths in 2D, it ensures that horizontal segments are exactly one unit long, although vertical segments can stretch to 2 or 5 units, slightly raising the average displacement. The Peano curve also achieves asymptotic stability at higher ranks, with its performance aligning closely with the Hilbert curve as resolution increases.
+&lt;h3 id=&quot;hilbert-curve&quot;&gt;Hilbert Curve&lt;&#x2F;h3&gt;
+&lt;aside&gt;
+&lt;img class=&quot;&quot;alt=&quot;Example of a Hilbert curve&quot;src=&quot;hilbert256.png&quot;&#x2F;&gt;
+&lt;&#x2F;aside&gt;
+Hilbert curve stands out as the best option for preserving locality. Its recursive, self-similar structure ensures that adjacent points in the sequence remain as close as possible in the original space, outperforming the Peano curve in both horizontal and vertical coherence. The Hilbert curve also scales well to higher dimensions, maintaining its locality-preserving properties regardless of resolution. Studies such as Color-Space Dimension Reduction and Bongki 2001 consistently rate the Hilbert curve as the superior choice, edging out the Peano curve in overall performance.
+&lt;h2 id=&quot;implementation&quot;&gt;Implementation&lt;&#x2F;h2&gt;
+&lt;p&gt;To achieve a mapping that preserves spatial relationships, I turn to the Hilbert curve, a type of fractal known as a space-filling curve. The Hilbert curve provides an elegant solution to the problem of mapping 2D space to 1D space while preserving locality. Here’s why it’s so effective:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Locality Preservation: Points that are close together on the Hilbert curve are also close together in the 2D image. This ensures that nearby pixels are mapped to nearby frequencies, preserving spatial coherence.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Scalability: The Hilbert curve is recursive and self-similar, meaning it can scale to any resolution. Whether the image is 256x256 or 512x512 pixels, the curve adapts seamlessly, providing a consistent framework for feature extraction.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Stability Across Resolutions: As the resolution of an image increases, the points on the Hilbert curve move less and less. This stability is crucial for applications where the resolution may change over time, such as progressive updates to image datasets or hierarchical processing pipelines.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h3 id=&quot;the-process-of-hilbertification&quot;&gt;The Process of Hilbertification&lt;&#x2F;h3&gt;
+&lt;aside&gt;
+&lt;img class=&quot;&quot;alt=&quot;Example of a Hilbert Curve&quot;src=&quot;hilbert-curve-anim.gif&quot;&#x2F;&gt;
+Animation showing Hilbert Curve spanning an image of various resolutions. Courtesy of Wikipedia
+&lt;&#x2F;aside&gt;
+Hilbertification refers to the process of mapping an image’s pixel data to a 1D representation using the Hilbert curve. Here’s how it works:
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Divide the Image into Quadrants: The Hilbert curve starts by dividing the image into smaller regions, or quadrants, and defining a path that traverses each quadrant in a specific order.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Recursive Subdivision: Each quadrant is further subdivided into smaller grids, with the Hilbert curve path becoming increasingly intricate. This process repeats until the curve has visited every pixel in the image.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Generate a 1D Sequence: The final result is a 1D sequence of pixel intensities, where the order of the pixels reflects the traversal path of the Hilbert curve. This sequence forms the input for subsequent signal processing steps.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h3 id=&quot;wavelet-transforms-for-feature-localization-and-compression&quot;&gt;Wavelet Transforms for Feature Localization and Compression&lt;&#x2F;h3&gt;
+&lt;p&gt;After Hilbertification, the next step is to apply wavelet transforms, which are mathematical tools for analyzing signals at multiple scales. Unlike Fourier transforms, which only provide frequency information, wavelet transforms capture both frequency and spatial (or temporal) information, making them ideal for feature extraction in images.&lt;&#x2F;p&gt;
+&lt;figure&gt;
+&lt;img class=&quot;&quot;alt=&quot;Example of a Continuous Wavelet Transform&quot;src=&quot;Continuous_wavelet_transform.gif&quot;&#x2F;&gt;
+&lt;figcaption&gt;
+Animation showing how wavelet transforms work. Courtesy of Wikipedia
+&lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;h2 id=&quot;experimentation&quot;&gt;Experimentation&lt;&#x2F;h2&gt;
+&lt;p&gt;Support vector machines (SVMs) are a set of supervised learning methods used for classification, regression and outliers detection. The advantages of support vector machines are that they are effective in high dimensional spaces, still effective in cases where number of dimensions is greater than the number of samples, use a subset of training points in the decision function (called support vectors), so it is also memory efficient and versatile due to them supporting different Kernel functions which can be specified for the decision function. &lt;sup class=&quot;footnote-reference&quot; id=&quot;fr-5-1&quot;&gt;&lt;a href=&quot;#fn-5&quot;&gt;[5]&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;
+This was then followed by hilbertification, which is the process of serializing the image to the frequency domain as discussed earlier. This was then passed onto for localization.
+The fundamental idea of wavelet transforms is that the transformation should allow only changes in time extension, but not shape, this means that it encapsulates a denser representation of our signal on the time domain such that it preserves the spatial relationships as changes in the time extension are expected to conform to the corresponding analysis frequency of the basis function &lt;sup class=&quot;footnote-reference&quot; id=&quot;fr-6-1&quot;&gt;&lt;a href=&quot;#fn-6&quot;&gt;[6]&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;.
+This gives us a more dense set of features which is 1&#x2F;4 the size of the original image.&lt;&#x2F;p&gt;
+&lt;figure&gt;
+&lt;img class=&quot;&quot;alt=&quot;A Sample of the Data Used, before and after the proposed hilbertification method&quot;src=&quot;hilbert_diagram.svg&quot;&#x2F;&gt;
+&lt;figcaption&gt;
+    A Sample of the Data Used, before and after the proposed hilbertification method
+&lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;p&gt;Table below gives an overview of how my proposed method performs.
+Note that for my tests I had taken the entire image as a baseline.
+Apart from the documented results show below,
+I have also compared my method to cosine-transformed version of the dataset,
+in which case the result of the cosine-transformed classifiers were abnormally low so I decided to not publish those as it maybe due to my own faulty implementation
+I had also tried CIFAR-10 dataset, since that dataset is a color dataset, I did not get time to properly implement the method for the dataset.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;results-of-the-proposed-method&quot;&gt;Results of the Proposed Method&lt;&#x2F;h3&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Dataset&lt;&#x2F;th&gt;&lt;th&gt;Method&lt;&#x2F;th&gt;&lt;th&gt;Linear SVM&lt;&#x2F;th&gt;&lt;th&gt;RBF Kernel&lt;&#x2F;th&gt;&lt;th&gt;Polynomial Kernel&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;&lt;strong&gt;Fashion MNIST&lt;&#x2F;strong&gt;&lt;&#x2F;td&gt;&lt;td&gt;Hilbertified&lt;&#x2F;td&gt;&lt;td&gt;87.273&lt;&#x2F;td&gt;&lt;td&gt;88.275&lt;&#x2F;td&gt;&lt;td&gt;87.991&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;&#x2F;td&gt;&lt;td&gt;Baseline&lt;&#x2F;td&gt;&lt;td&gt;91.493&lt;&#x2F;td&gt;&lt;td&gt;89.917&lt;&#x2F;td&gt;&lt;td&gt;91.584&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;strong&gt;MNIST&lt;&#x2F;strong&gt;&lt;&#x2F;td&gt;&lt;td&gt;Hilbertified&lt;&#x2F;td&gt;&lt;td&gt;96.026&lt;&#x2F;td&gt;&lt;td&gt;96.535&lt;&#x2F;td&gt;&lt;td&gt;97.134&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;&#x2F;td&gt;&lt;td&gt;Baseline&lt;&#x2F;td&gt;&lt;td&gt;98.318&lt;&#x2F;td&gt;&lt;td&gt;98.661&lt;&#x2F;td&gt;&lt;td&gt;99.288&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;h2 id=&quot;conclusions&quot;&gt;Conclusions&lt;&#x2F;h2&gt;
+&lt;p&gt;In order to reduce the number of features that are being considered while classification is done and still achieve a better accuracy levels, I applied hilbertification to the dataset and then used wavelets to localize the features thus giving us a denser set of features almost one-fourth of the original image.
+The results that I saw was not significantly lower when compared to the results obtained while considering all the features.
+Thus, it can be said that my method indeed captures the spatial relationships as proposed.
+Based on this, I have come to believe that the proposed method is not only viable, it also encodes some of very useful spatial information in a very dense space.
+This method can be extended extensively in future work by expanding to higher number of dimensions since it can efficiently encode temporal and spatial and even higher order dimensional data.&lt;&#x2F;p&gt;
+&lt;hr&gt;&lt;ol class=&quot;footnotes-list&quot;&gt;
+&lt;li id=&quot;fn-2&quot;&gt;
+&lt;p&gt;Falconer, Kenneth (2003). “Fractal Geometry: Mathematical Foundations and Applications.” John Wiley &amp;amp; Sons. xxv ISBN 0-470-84862-6. &lt;a href=&quot;#fr-2-1&quot;&gt;↩&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li id=&quot;fn-1&quot;&gt;
+&lt;p&gt;von Melchner, Laurie &amp;amp; Pallas, Sarah &amp;amp; Sur, Mriganka (2000) “Visual Behaviour Mediated by Retinal Projections Directed to the Auditory Pathway.” Nature 404 871-6. 10.1038&#x2F;35009102. &lt;a href=&quot;#fr-1-1&quot;&gt;↩&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li id=&quot;fn-3&quot;&gt;
+&lt;p&gt;Boeing, G. (2016). “Visual Analysis of Nonlinear Dynamical Systems: Chaos, Fractals, Self-Similarity and the Limits of Prediction.” Systems 4 (4): 37. doi:10.3390&#x2F;systems4040037. &lt;a href=&quot;#fr-3-1&quot;&gt;↩&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li id=&quot;fn-7&quot;&gt;
+&lt;p&gt;Jaffer, Aubrey. “Color-Space Dimension Reduction.” Accessed November 19, 2018. https:&#x2F;&#x2F;people.csail.mit.edu&#x2F;jaffer&#x2F;CNS&#x2F;PSFCDR. &lt;a href=&quot;#fr-7-1&quot;&gt;↩&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li id=&quot;fn-5&quot;&gt;
+&lt;p&gt;Alex J. Smola, Bernhard Schölkopf. “A Tutorial on Support Vector Regression.” Statistics and Computing archive Volume 14 Issue 3, August 2004, p. 199-222. &lt;a href=&quot;#fr-5-1&quot;&gt;↩&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li id=&quot;fn-6&quot;&gt;
+&lt;p&gt;Chui, Charles K. (1992). “An Introduction to Wavelets.” San Diego: Academic Press ISBN 0-12-174584-8. &lt;a href=&quot;#fr-6-1&quot;&gt;↩&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+</content>
+        
+    </entry>
+</feed>

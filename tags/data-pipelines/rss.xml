@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+      <title>TheAnig - data-pipelines</title>
+      <link>https://theanig.github.io</link>
+      <description>This is my own personal corner of the internet</description>
+      <generator>Zola</generator>
+      <language>en</language>
+      <atom:link href="https://theanig.github.io/tags/data-pipelines/rss.xml" rel="self" type="application/rss+xml"/>
+      <lastBuildDate>Fri, 04 Sep 2020 00:00:00 +0000</lastBuildDate>
+      <item>
+          <title>Understanding Cooperative Rebalancing in Apache Kafka</title>
+          <pubDate>Fri, 04 Sep 2020 00:00:00 +0000</pubDate>
+          <author>Anirudh Ganesh</author>
+          <link>https://theanig.github.io/blog/incremental-cooperative-rebalancing-kafka/</link>
+          <guid>https://theanig.github.io/blog/incremental-cooperative-rebalancing-kafka/</guid>
+          <description xml:base="https://theanig.github.io/blog/incremental-cooperative-rebalancing-kafka/">&lt;blockquote class=&quot;caution&quot;&gt;
+	&lt;p class=&quot;alert-title&quot;&gt;
+		&lt;i class=&quot;icon&quot;&gt;&lt;&#x2F;i&gt;Caution&lt;&#x2F;p&gt;
+	&lt;ul&gt;
+&lt;li&gt;Diagrams&lt;&#x2F;li&gt;
+&lt;li&gt;Change some of the bullet points to organic paragraphs by rewriting it&lt;&#x2F;li&gt;
+&lt;li&gt;Add personal anecdote about copycat and how consumergroups are created&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;Apache Kafka is a distributed messaging system that handles large data volumes efficiently and reliably. Producers publish data to topics, and consumers subscribe to these topics to consume the data. It also stores data across multiple brokers and partitions, allowing it to scale horizontally.&lt;&#x2F;p&gt;
+&lt;p&gt;One of the key challenges in maintaining Kafka’s performance is ensuring a balanced distribution of partitions across consumers. Kafka’s rebalancing process helps achieve this, but traditional approaches have significant drawbacks, leading to the introduction of incremental cooperative rebalancing as a more efficient alternative.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;key-concepts-in-kafka-rebalancing&quot;&gt;Key Concepts in Kafka Rebalancing&lt;&#x2F;h2&gt;
+&lt;p&gt;Before diving into cooperative rebalancing, let’s review some essential Kafka concepts:&lt;&#x2F;p&gt;
+&lt;figure&gt;
+&lt;img class=&quot;&quot;alt=&quot;A Brief Overview of Kafka Architecture&quot;src=&quot;kafka_architecture.svg&quot;&#x2F;&gt;
+&lt;figcaption&gt;
+    A Brief Overview of Kafka Architecture
+&lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Brokers&lt;&#x2F;strong&gt;: Servers that manage the storage and transfer of data within Kafka clusters.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Partition&lt;&#x2F;strong&gt;: A unit of parallelism within a Kafka topic, where each partition is an ordered, immutable sequence of records.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Consumer Group&lt;&#x2F;strong&gt;: A set of consumers that collaboratively consume data from one or more topics, with each consumer being assigned partitions.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Rebalance&lt;&#x2F;strong&gt;: The process of redistributing partitions among consumer instances in a group.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Partition Assignment Strategy&lt;&#x2F;strong&gt;: The algorithm Kafka uses to assign partitions, including round-robin, range, and sticky assignments.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;the-traditional-rebalancing-problem&quot;&gt;The Traditional Rebalancing Problem&lt;&#x2F;h2&gt;
+&lt;p&gt;Kafka rebalancing is triggered when consumers join or leave a group, new partitions are added, or consumer failures occur. The traditional “stop-the-world” rebalancing process involves:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Kafka notifying all consumers to stop consuming data.&lt;&#x2F;li&gt;
+&lt;li&gt;Consumers rejoining the group and undergoing partition reassignment.&lt;&#x2F;li&gt;
+&lt;li&gt;Consumers resuming processing once the rebalance completes.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;This approach comes with its fair share of challenges.
+One major issue is increased latency—whenever rebalancing happens, consumers are temporarily paused, this obviously leads to delays in processing messages.
+This can create bottlenecks, especially in systems that rely on real-time data flow. In my case the consumer service would start firing availability alerts on our pipelines if it took longer than 15minutes.
+On some very high throughput topics, this would mean to increase the consumer group size temporarily to handle the extra load this causes, then scale it back. Overall baby sitting this was unnecessary burden.&lt;&#x2F;p&gt;
+&lt;p&gt;Another concern is reduced throughput.
+Frequent rebalancing can disrupt the consumer group assignments, sometimes overloading some brokers and other times leaving them underutilized. This instability can make it harder to maintain optimal usage.&lt;&#x2F;p&gt;
+&lt;p&gt;Also, there’s the problem of higher resource usage.
+Every time partitions are moved around, it consumes CPU, memory, and network bandwidth.
+In large-scale deployments like ours, these overheads can quickly add up, impacting overall system performance.
+Finally, there’s the risk of potential data loss.
+If rebalancing isn’t handled carefully, unprocessed messages might slip through the cracks, leading to inconsistencies and gaps in the data pipeline, affecting some of our completeness guarantees.
+Ensuring that messages aren’t lost during transitions is another challenge for maintaining our SLAs.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;challenges-with-stop-the-world-rebalancing&quot;&gt;Challenges with Stop-the-World Rebalancing&lt;&#x2F;h2&gt;
+&lt;p&gt;When I first started working with Kafka, I quickly ran into the quirks of its traditional rebalancing model.
+On paper, it made sense—partitions get redistributed to keep things balanced.
+But in reality, the process wasn’t as smooth as I had hoped, especially as the system grew in complexity.&lt;&#x2F;p&gt;
+&lt;p&gt;One of the biggest pain points was scaling up and down. As we added more consumers or removed them, the rebalancing process became increasingly expensive.
+The more resources there were to shuffle around, the longer everything took, making what should have been a simple operation a performance headache.&lt;&#x2F;p&gt;
+&lt;p&gt;Then there was multi-tenancy.
+In shared environments where different teams were running diverse workloads, a single rebalancing event could unexpectedly impact someone else’s pipeline.
+I remember a time when our team’s batch processing job was disrupted mid-run simply because the consumer counts got adjusted on an unrelated topic.&lt;&#x2F;p&gt;
+&lt;p&gt;Rolling upgrades were another tricky part.
+Ideally, updating our infrastructure shouldn’t disrupt workloads, but Kafka’s default rebalancing model didn’t play nicely with rolling restarts.
+I remember this one time, an upgrade window which caused a full rebalancing event, slowing things down so much that what should have been a minor version bump turned into a whole bunch of pages constantly buzzing me.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;incremental-cooperative-rebalancing&quot;&gt;Incremental Cooperative Rebalancing&lt;&#x2F;h2&gt;
+&lt;p&gt;To mitigate these issues, Kafka 2.4 introduced incremental cooperative rebalancing, which improves the rebalance process by allowing consumers to retain their current assignments while incrementally taking on new partitions. This approach minimizes disruptions and ensures a smoother transition.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;key-improvements-of-incremental-cooperative-rebalancing&quot;&gt;Key Improvements of Incremental Cooperative Rebalancing&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Incremental Partition Transfer&lt;&#x2F;strong&gt;: Only affected partitions are reassigned instead of stopping all consumers.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Continuous Data Processing&lt;&#x2F;strong&gt;: Consumers remain active and process messages during rebalance.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Parallel Rebalancing&lt;&#x2F;strong&gt;: New consumers can join and consume data concurrently.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Graceful Partition Handling&lt;&#x2F;strong&gt;: Consumers are given a grace period to return before partitions are reassigned.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Sticky Assignor Implementation&lt;&#x2F;strong&gt;: This strategy optimizes assignments by trying to retain previous partition allocations.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;how-incremental-cooperative-rebalancing-works&quot;&gt;How Incremental Cooperative Rebalancing Works&lt;&#x2F;h2&gt;
+&lt;p&gt;Kafka clients use an embedded rebalance protocol to manage partition assignments autonomously without burdening Kafka brokers. The rebalancing process follows these steps:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Kafka sends a &lt;code&gt;GroupCoordinator&lt;&#x2F;code&gt; message to notify consumers.&lt;&#x2F;li&gt;
+&lt;li&gt;Consumers respond with a &lt;code&gt;JoinGroup&lt;&#x2F;code&gt; message to indicate participation.&lt;&#x2F;li&gt;
+&lt;li&gt;Consumers voluntarily release partitions that need reassignment.&lt;&#x2F;li&gt;
+&lt;li&gt;Incremental reassignment happens in multiple rounds without halting all consumers.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;The process completes when the workload is evenly distributed across consumers.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;reducing-rebalance-frequency&quot;&gt;Reducing Rebalance Frequency&lt;&#x2F;h2&gt;
+&lt;p&gt;While rebalancing is necessary, frequent rebalances can degrade performance. Some best practices to reduce rebalancing events include:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Increase Session Timeout&lt;&#x2F;strong&gt;: Adjust session.&lt;code&gt;timeout.ms&lt;&#x2F;code&gt; to allow consumers more time to recover before being marked as inactive.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Optimize Poll Intervals&lt;&#x2F;strong&gt;: Set &lt;code&gt;max.poll.interval.ms&lt;&#x2F;code&gt; to accommodate longer processing times.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Limit Partitions per Topic&lt;&#x2F;strong&gt;: Reducing the number of partitions can decrease rebalance occurrences.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Use Static Group Membership&lt;&#x2F;strong&gt;: Assign partitions manually to consumers for a fixed workload distribution.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;performance-improvements-with-incremental-cooperative-rebalancing&quot;&gt;Performance Improvements with Incremental Cooperative Rebalancing&lt;&#x2F;h2&gt;
+&lt;p&gt;Benchmarks&lt;sup class=&quot;footnote-reference&quot; id=&quot;fr-1-1&quot;&gt;&lt;a href=&quot;#fn-1&quot;&gt;[1]&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; have shown that incremental cooperative rebalancing drastically reduces rebalancing time and improves throughput in large-scale deployments. For instance, a test running 900 Kafka Connect tasks showed the following improvements:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Aggregate throughput increased by &lt;strong&gt;113%&lt;&#x2F;strong&gt;.&lt;&#x2F;li&gt;
+&lt;li&gt;Median throughput improved by &lt;strong&gt;101%&lt;&#x2F;strong&gt;.&lt;&#x2F;li&gt;
+&lt;li&gt;Maximum throughput saw an &lt;strong&gt;833% increase&lt;&#x2F;strong&gt;.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;These improvements result from the ability of Kafka clients to absorb resource fluctuations gracefully without completely stopping operations.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;&#x2F;h2&gt;
+&lt;p&gt;Incremental cooperative rebalancing in Kafka is a significant step forward in improving consumer group management. By transitioning from the traditional stop-the-world approach to a more gradual, cooperative model, organizations can achieve higher availability, scalability, and performance in their Kafka deployments.&lt;&#x2F;p&gt;
+&lt;p&gt;Implementing these techniques and understanding best practices ensures a more resilient and efficient streaming data pipeline, reducing disruptions and optimizing resource utilization.&lt;&#x2F;p&gt;
+&lt;hr&gt;&lt;ol class=&quot;footnotes-list&quot;&gt;
+&lt;li id=&quot;fn-1&quot;&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.confluent.io&#x2F;blog&#x2F;incremental-cooperative-rebalancing-in-kafka&#x2F;&quot;&gt;Incremental Cooperative Rebalancing in Apache Kafka: Why Stop the World When You Can Change It?&lt;&#x2F;a&gt; &lt;a href=&quot;#fr-1-1&quot;&gt;↩&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+</description>
+      </item>
+    </channel>
+</rss>

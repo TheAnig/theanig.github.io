@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+      <title>TheAnig - open-source</title>
+      <link>https://theanig.github.io</link>
+      <description>This is my own personal corner of the internet</description>
+      <generator>Zola</generator>
+      <language>en</language>
+      <atom:link href="https://theanig.github.io/tags/open-source/rss.xml" rel="self" type="application/rss+xml"/>
+      <lastBuildDate>Tue, 29 Jun 2021 00:00:00 +0000</lastBuildDate>
+      <item>
+          <title>Exploring the Gopher Protocol</title>
+          <pubDate>Tue, 29 Jun 2021 00:00:00 +0000</pubDate>
+          <author>Anirudh Ganesh</author>
+          <link>https://theanig.github.io/blog/gopher-protocol/</link>
+          <guid>https://theanig.github.io/blog/gopher-protocol/</guid>
+          <description xml:base="https://theanig.github.io/blog/gopher-protocol/">&lt;p&gt;The Gopher protocol, often overshadowed by the rise of the World Wide Web,
+remains an intriguing and efficient way to access and share information online.
+Originally developed at the University of Minnesota in the early 1990s, Gopher provided a hierarchical, text-based browsing experience that emphasized simplicity and speed.
+Despite its decline in mainstream usage, the protocol continues to have a dedicated following and offers valuable insights into lightweight, structured content distribution.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;understanding-the-gopher-protocol&quot;&gt;Understanding the Gopher Protocol&lt;&#x2F;h2&gt;
+&lt;p&gt;Gopher is a client-server protocol designed for distributing, searching, and retrieving documents over the Internet.
+Unlike the web, which allows for complex hypertext linking and multimedia content, Gopher structures information into a series of menus and files, presented in a line-based format.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;core-features&quot;&gt;Core Features&lt;&#x2F;h3&gt;
+&lt;p&gt;When I first stumbled upon Gopher, what immediately stood out was how organized and hierarchical it was.
+Unlike the modern web, which often feels like an endless labyrinth of links, Gopher structures information in a way that just makes sense.
+Everything is neatly arranged into menus and documents, making it easy to navigate without the distractions of ads, pop-ups, or flashy visuals.
+It reminded me of the early days of exploring file systems—simple, direct, and efficient.&lt;&#x2F;p&gt;
+&lt;p&gt;Another thing I found fascinating was how lightweight it is.
+Because Gopher doesn’t rely on heavy multimedia or bloated scripts, it consumes barely any bandwidth.
+It’s the kind of system that could still work beautifully on dial-up or in places with spotty internet.
+One particular place where this would’ve been cool to see in the early days of Kindle which came with unlimited
+free 3G internet, when Amazon started limiting access to only Amazon ebooks and Wikipedia, I believe if Kindles
+came with Gopher support, it would’ve been cool to have explored the Gopherspace on a kindle.
+It’s one of those devices which is also very text focused and it would’ve been great to see.&lt;&#x2F;p&gt;
+&lt;p&gt;Gopher also takes a text-first approach, focusing purely on content without unnecessary formatting.
+There’s something refreshing about that—no autoplay videos, no massive images breaking layouts, just straightforward information.
+It’s the kind of simplicity I sometimes miss when trying to read an article online and having to wade through cookie banners, newsletters, and a dozen other distractions.&lt;&#x2F;p&gt;
+&lt;p&gt;What’s even cooler is how versatile its linking system is.
+Gopher doesn’t just connect documents and directories; it can link to all kinds of external services, even Telnet.
+This opens up possibilities beyond simple browsing, making it feel more like a lightweight, interconnected internet.
+I can imagine how there could be an alternate universe where Gopher took off and people watch youtube through telnet ascii art videos, like that one
+Star Wars ascii art video on telnet.&lt;&#x2F;p&gt;
+&lt;p&gt;Gopher might be a relic of an earlier internet era, but its design choices—efficiency, simplicity, and structure—still have a lot to offer.
+In a world where the web is growing heavier and more complex, revisiting something so streamlined is a refreshing reminder that sometimes, less is more.
+I wonder how an interactive service would look like in the Gopherspace, something like the equivalent of today’s SPA in React&#x2F;Vue etc.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;gopher-protocol-specification&quot;&gt;Gopher Protocol Specification&lt;&#x2F;h2&gt;
+&lt;p&gt;Digging into the technical details of the Gopher protocol to try and understand how it works is pretty interesting.
+It seems the protocol is designed to save bandwidth and keep things simple,
+I guess this is because it was designed in the early days of the internet when they might not have had the bandwidth we have today.
+The Gopher protocol is defined by RFC 1436 and consists of a simple request-response mechanism:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Client Request&lt;&#x2F;strong&gt;: The client sends a single-line request to the server, containing a selector string that identifies the resource.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Server Response&lt;&#x2F;strong&gt;: The server returns either a directory listing (menu) or the requested file content.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Data Format&lt;&#x2F;strong&gt;: Each line in a directory listing follows this structure:&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;typeIndicator &amp;lt;TAB&amp;gt; displayName &amp;lt;TAB&amp;gt; selector &amp;lt;TAB&amp;gt; hostname &amp;lt;TAB&amp;gt; port
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;gopher-item-types&quot;&gt;Gopher Item Types&lt;&#x2F;h3&gt;
+&lt;p&gt;Each resource in a Gopher menu is identified by a single-character type code:&lt;&#x2F;p&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Type Code&lt;&#x2F;th&gt;&lt;th&gt;Description&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;0&lt;&#x2F;td&gt;&lt;td&gt;Plain Text File&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;1&lt;&#x2F;td&gt;&lt;td&gt;Directory (Menu)&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;7&lt;&#x2F;td&gt;&lt;td&gt;Full-text Search Query&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;h&lt;&#x2F;td&gt;&lt;td&gt;HTML File (Non-standard)&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;g&lt;&#x2F;td&gt;&lt;td&gt;GIF Image (Non-standard)&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;I&lt;&#x2F;td&gt;&lt;td&gt;Binary File&#x2F;Image&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;h2 id=&quot;detailed-technical-aspects&quot;&gt;Detailed Technical Aspects&lt;&#x2F;h2&gt;
+&lt;p&gt;Gopher operates over TCP&#x2F;IP and listens on port 70, as assigned by IANA. When a client connects, it sends a selector string, which can be empty, to the server. The server processes this request and responds with either:&lt;&#x2F;p&gt;
+&lt;p&gt;A directory listing containing item types, user-visible names, selector strings, hostnames, and port numbers.&lt;&#x2F;p&gt;
+&lt;p&gt;A document consisting of a simple text block terminated by a period on a line by itself.&lt;&#x2F;p&gt;
+&lt;p&gt;For a full-text search query (type 7), the client sends a query string in addition to the selector, and the server responds with a virtual directory containing matching entries.&lt;&#x2F;p&gt;
+&lt;p&gt;The protocol’s simplicity allows debugging via telnet by manually sending requests and observing responses.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;developing-for-gopher&quot;&gt;Developing for Gopher&lt;&#x2F;h3&gt;
+&lt;p&gt;Developing Gopher content involves structuring a gophermap file that defines how clients interpret and present your data. A typical Gopher menu might look like this:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;0Welcome to My Gopher Space&amp;lt;TAB&amp;gt;&#x2F;welcome.txt&amp;lt;TAB&amp;gt;gopher.example.com&amp;lt;TAB&amp;gt;70
+&lt;&#x2F;span&gt;&lt;span&gt;1About&amp;lt;TAB&amp;gt;&#x2F;about&amp;lt;TAB&amp;gt;gopher.example.com&amp;lt;TAB&amp;gt;70
+&lt;&#x2F;span&gt;&lt;span&gt;7Search&amp;lt;TAB&amp;gt;&#x2F;search&amp;lt;TAB&amp;gt;gopher.example.com&amp;lt;TAB&amp;gt;70
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;gopher-search-engines&quot;&gt;Gopher Search Engines&lt;&#x2F;h3&gt;
+&lt;p&gt;Several search services index Gopherspace and provide full-text search capabilities:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Floodgap&lt;&#x2F;strong&gt; (gopher:&#x2F;&#x2F;gopher.floodgap.com): A well-maintained Gopher search and directory service.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Gopherpedia&lt;&#x2F;strong&gt;: A Gopher version of Wikipedia.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;&#x2F;h2&gt;
+&lt;p&gt;Exploring the Gopher protocol has been a fascinating journey into the early days of the internet.
+Reading about it has motivated me to set up my own blog on Gopherspace as a fun side project.
+If I have the free time, I might even try to build a Gopher server&#x2F;creating some kind of analogue to the static site generators we have today.&lt;&#x2F;p&gt;
+</description>
+      </item>
+    </channel>
+</rss>

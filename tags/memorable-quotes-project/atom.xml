@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>TheAnig - memorable-quotes-project</title>
+    <subtitle>This is my own personal corner of the internet</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://theanig.github.io/tags/memorable-quotes-project/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://theanig.github.io"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2018-07-26T00:00:00+00:00</updated>
+    <id>https://theanig.github.io/tags/memorable-quotes-project/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Deep Learning Methods for Quotable Text</title>
+        <published>2018-07-26T00:00:00+00:00</published>
+        <updated>2018-07-26T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Anirudh Ganesh
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://theanig.github.io/blog/deep-learning-for-memorable-quotes/"/>
+        <id>https://theanig.github.io/blog/deep-learning-for-memorable-quotes/</id>
+        
+        <summary type="html">&lt;h2 id=&quot;abstract&quot;&gt;Abstract&lt;&#x2F;h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The goal of this study is to find out what makes a given sentence more memorable and quotable
+than others. Traditional methods of linguistic analysis have been done historically and they’ve had
+limited sucess. The aim of this study is to find out whether a machine learning solely on its own, is
+able to learn more effectively.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+</summary>
+        
+    </entry>
+</feed>

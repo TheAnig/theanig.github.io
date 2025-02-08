@@ -1,0 +1,738 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+      <title>TheAnig</title>
+      <link>https://theanig.github.io</link>
+      <description>This is my own personal corner of the internet</description>
+      <generator>Zola</generator>
+      <language>en</language>
+      <atom:link href="https://theanig.github.io/rss.xml" rel="self" type="application/rss+xml"/>
+      <lastBuildDate>Sun, 09 Feb 2025 00:00:00 +0000</lastBuildDate>
+      <item>
+          <title>Migrating to Github Pages</title>
+          <pubDate>Sun, 09 Feb 2025 00:00:00 +0000</pubDate>
+          <author>Anirudh Ganesh</author>
+          <link>https://theanig.github.io/blog/hello-world-migrating/</link>
+          <guid>https://theanig.github.io/blog/hello-world-migrating/</guid>
+          <description xml:base="https://theanig.github.io/blog/hello-world-migrating/">&lt;h2 id=&quot;a-new-home-for-my-documentation&quot;&gt;A New Home for My Documentation&lt;&#x2F;h2&gt;
+&lt;p&gt;When I first started documenting my work on my old Google Sites website,
+I had a simple goal: to have a public copy of the work I was doing and had done.
+It was a way for me to track my progress, organize my thoughts, and maybe even help someone else who stumbled upon it.
+I didn’t put much thought into longevity—I assumed that once something was on the web, it would remain accessible in some form, either through archiving or persistence in search engine indexes.&lt;&#x2F;p&gt;
+&lt;p&gt;However, I recently realized that’s not necessarily true.
+Despite the internet’s reputation for permanence, entire platforms can disappear, and with them, the content we rely on.
+My Google Sites blog was deleted because my blogging account was removed due to inactivity.
+The account was tied to my OSU account, which I used heavily at the time but lost access to after graduation.
+Google likely attempted to notify me, but since I no longer had access to the account, I missed any warnings and lost my content permanently.
+This served as a wake-up call: if I want my work to endure, I need to be more intentional about where and how I host it.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;github-pages-a-fresh-start&quot;&gt;Github Pages: A Fresh Start&lt;&#x2F;h2&gt;
+&lt;p&gt;To ensure my blog remains accessible,
+I’ve migrated everything to GitHub Pages, now under a custom domain.
+Not only does this give me greater control over my content, but it also allows me to embrace best practices for independent publishing.
+As I work on re-adding the content from my old site, I’m planning to do a better job of actively sharing and promoting my work, this time around.&lt;&#x2F;p&gt;
+&lt;p&gt;I’ve also decided to start fresh with a new theme and a more focused approach to my content.
+My old blog was run on Jekyll, now I’m using Zola, a static site generator written in Rust,
+which I find more enjoyable to work with and more aligned with my current interests.&lt;&#x2F;p&gt;
+&lt;p&gt;While thinking about how to maintain my blog,
+I came across the Indie Web movement and the Small Web community.
+These communities of creators emphasize ownership over their own content, avoiding dependency on centralized platforms, and fostering genuine connections among like-minded individuals.
+I find this philosophy fascinating—rather than relying on social media algorithms to dictate reach, the Indie Web encourages a more direct, human approach to sharing ideas and work.
+Since the work that I want to share is kind of niche, technical and somewhat personal, I love the idea, especially since I don’t plan to monetize my blog, I don’t need to worry about SEO or ad revenue.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;posse-publish-on-my-own-site-first-philosophy&quot;&gt;POSSE: Publish on My Own Site First Philosophy&lt;&#x2F;h2&gt;
+&lt;p&gt;A key principle in the Indie Web movement is POSSE (Publish on your Own Site, Syndicate Elsewhere).
+This means my primary content will always live on my own domain, and I will share it across different platforms as needed.
+This ensures that my work remains under my control while still reaching a wider audience through syndication.
+POSSE is an evolution of POSE (Publish Once, Syndicate Everywhere), which is more flexible but lacks the strong emphasis on self-hosting.
+As I integrate these principles into my workflow, I hope to build a blog that is both enduring and easily shareable.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;what-s-next&quot;&gt;What’s Next?&lt;&#x2F;h2&gt;
+&lt;p&gt;Going forward, I’ll be restoring old posts and actively maintaining my blog as a long-term resource.
+I’ll also experiment with tools and strategies that align with the Indie Web philosophy, ensuring that my content remains accessible, independent, and useful.&lt;&#x2F;p&gt;
+&lt;p&gt;If you’re interested in similar ideas, I’d love to hear from you! I have included my socials on my blog, so feel free to reach out!&lt;&#x2F;p&gt;
+</description>
+      </item>
+      <item>
+          <title>Exploring the Gopher Protocol</title>
+          <pubDate>Tue, 29 Jun 2021 00:00:00 +0000</pubDate>
+          <author>Anirudh Ganesh</author>
+          <link>https://theanig.github.io/blog/gopher-protocol/</link>
+          <guid>https://theanig.github.io/blog/gopher-protocol/</guid>
+          <description xml:base="https://theanig.github.io/blog/gopher-protocol/">&lt;p&gt;The Gopher protocol, often overshadowed by the rise of the World Wide Web,
+remains an intriguing and efficient way to access and share information online.
+Originally developed at the University of Minnesota in the early 1990s, Gopher provided a hierarchical, text-based browsing experience that emphasized simplicity and speed.
+Despite its decline in mainstream usage, the protocol continues to have a dedicated following and offers valuable insights into lightweight, structured content distribution.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;understanding-the-gopher-protocol&quot;&gt;Understanding the Gopher Protocol&lt;&#x2F;h2&gt;
+&lt;p&gt;Gopher is a client-server protocol designed for distributing, searching, and retrieving documents over the Internet.
+Unlike the web, which allows for complex hypertext linking and multimedia content, Gopher structures information into a series of menus and files, presented in a line-based format.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;core-features&quot;&gt;Core Features&lt;&#x2F;h3&gt;
+&lt;p&gt;When I first stumbled upon Gopher, what immediately stood out was how organized and hierarchical it was.
+Unlike the modern web, which often feels like an endless labyrinth of links, Gopher structures information in a way that just makes sense.
+Everything is neatly arranged into menus and documents, making it easy to navigate without the distractions of ads, pop-ups, or flashy visuals.
+It reminded me of the early days of exploring file systems—simple, direct, and efficient.&lt;&#x2F;p&gt;
+&lt;p&gt;Another thing I found fascinating was how lightweight it is.
+Because Gopher doesn’t rely on heavy multimedia or bloated scripts, it consumes barely any bandwidth.
+It’s the kind of system that could still work beautifully on dial-up or in places with spotty internet.
+One particular place where this would’ve been cool to see in the early days of Kindle which came with unlimited
+free 3G internet, when Amazon started limiting access to only Amazon ebooks and Wikipedia, I believe if Kindles
+came with Gopher support, it would’ve been cool to have explored the Gopherspace on a kindle.
+It’s one of those devices which is also very text focused and it would’ve been great to see.&lt;&#x2F;p&gt;
+&lt;p&gt;Gopher also takes a text-first approach, focusing purely on content without unnecessary formatting.
+There’s something refreshing about that—no autoplay videos, no massive images breaking layouts, just straightforward information.
+It’s the kind of simplicity I sometimes miss when trying to read an article online and having to wade through cookie banners, newsletters, and a dozen other distractions.&lt;&#x2F;p&gt;
+&lt;p&gt;What’s even cooler is how versatile its linking system is.
+Gopher doesn’t just connect documents and directories; it can link to all kinds of external services, even Telnet.
+This opens up possibilities beyond simple browsing, making it feel more like a lightweight, interconnected internet.
+I can imagine how there could be an alternate universe where Gopher took off and people watch youtube through telnet ascii art videos, like that one
+Star Wars ascii art video on telnet.&lt;&#x2F;p&gt;
+&lt;p&gt;Gopher might be a relic of an earlier internet era, but its design choices—efficiency, simplicity, and structure—still have a lot to offer.
+In a world where the web is growing heavier and more complex, revisiting something so streamlined is a refreshing reminder that sometimes, less is more.
+I wonder how an interactive service would look like in the Gopherspace, something like the equivalent of today’s SPA in React&#x2F;Vue etc.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;gopher-protocol-specification&quot;&gt;Gopher Protocol Specification&lt;&#x2F;h2&gt;
+&lt;p&gt;Digging into the technical details of the Gopher protocol to try and understand how it works is pretty interesting.
+It seems the protocol is designed to save bandwidth and keep things simple,
+I guess this is because it was designed in the early days of the internet when they might not have had the bandwidth we have today.
+The Gopher protocol is defined by RFC 1436 and consists of a simple request-response mechanism:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Client Request&lt;&#x2F;strong&gt;: The client sends a single-line request to the server, containing a selector string that identifies the resource.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Server Response&lt;&#x2F;strong&gt;: The server returns either a directory listing (menu) or the requested file content.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Data Format&lt;&#x2F;strong&gt;: Each line in a directory listing follows this structure:&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;typeIndicator &amp;lt;TAB&amp;gt; displayName &amp;lt;TAB&amp;gt; selector &amp;lt;TAB&amp;gt; hostname &amp;lt;TAB&amp;gt; port
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;gopher-item-types&quot;&gt;Gopher Item Types&lt;&#x2F;h3&gt;
+&lt;p&gt;Each resource in a Gopher menu is identified by a single-character type code:&lt;&#x2F;p&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Type Code&lt;&#x2F;th&gt;&lt;th&gt;Description&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;0&lt;&#x2F;td&gt;&lt;td&gt;Plain Text File&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;1&lt;&#x2F;td&gt;&lt;td&gt;Directory (Menu)&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;7&lt;&#x2F;td&gt;&lt;td&gt;Full-text Search Query&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;h&lt;&#x2F;td&gt;&lt;td&gt;HTML File (Non-standard)&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;g&lt;&#x2F;td&gt;&lt;td&gt;GIF Image (Non-standard)&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;I&lt;&#x2F;td&gt;&lt;td&gt;Binary File&#x2F;Image&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;h2 id=&quot;detailed-technical-aspects&quot;&gt;Detailed Technical Aspects&lt;&#x2F;h2&gt;
+&lt;p&gt;Gopher operates over TCP&#x2F;IP and listens on port 70, as assigned by IANA. When a client connects, it sends a selector string, which can be empty, to the server. The server processes this request and responds with either:&lt;&#x2F;p&gt;
+&lt;p&gt;A directory listing containing item types, user-visible names, selector strings, hostnames, and port numbers.&lt;&#x2F;p&gt;
+&lt;p&gt;A document consisting of a simple text block terminated by a period on a line by itself.&lt;&#x2F;p&gt;
+&lt;p&gt;For a full-text search query (type 7), the client sends a query string in addition to the selector, and the server responds with a virtual directory containing matching entries.&lt;&#x2F;p&gt;
+&lt;p&gt;The protocol’s simplicity allows debugging via telnet by manually sending requests and observing responses.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;developing-for-gopher&quot;&gt;Developing for Gopher&lt;&#x2F;h3&gt;
+&lt;p&gt;Developing Gopher content involves structuring a gophermap file that defines how clients interpret and present your data. A typical Gopher menu might look like this:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;0Welcome to My Gopher Space&amp;lt;TAB&amp;gt;&#x2F;welcome.txt&amp;lt;TAB&amp;gt;gopher.example.com&amp;lt;TAB&amp;gt;70
+&lt;&#x2F;span&gt;&lt;span&gt;1About&amp;lt;TAB&amp;gt;&#x2F;about&amp;lt;TAB&amp;gt;gopher.example.com&amp;lt;TAB&amp;gt;70
+&lt;&#x2F;span&gt;&lt;span&gt;7Search&amp;lt;TAB&amp;gt;&#x2F;search&amp;lt;TAB&amp;gt;gopher.example.com&amp;lt;TAB&amp;gt;70
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;gopher-search-engines&quot;&gt;Gopher Search Engines&lt;&#x2F;h3&gt;
+&lt;p&gt;Several search services index Gopherspace and provide full-text search capabilities:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Floodgap&lt;&#x2F;strong&gt; (gopher:&#x2F;&#x2F;gopher.floodgap.com): A well-maintained Gopher search and directory service.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Gopherpedia&lt;&#x2F;strong&gt;: A Gopher version of Wikipedia.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;&#x2F;h2&gt;
+&lt;p&gt;Exploring the Gopher protocol has been a fascinating journey into the early days of the internet.
+Reading about it has motivated me to set up my own blog on Gopherspace as a fun side project.
+If I have the free time, I might even try to build a Gopher server&#x2F;creating some kind of analogue to the static site generators we have today.&lt;&#x2F;p&gt;
+</description>
+      </item>
+      <item>
+          <title>Understanding Cooperative Rebalancing in Apache Kafka</title>
+          <pubDate>Fri, 04 Sep 2020 00:00:00 +0000</pubDate>
+          <author>Anirudh Ganesh</author>
+          <link>https://theanig.github.io/blog/incremental-cooperative-rebalancing-kafka/</link>
+          <guid>https://theanig.github.io/blog/incremental-cooperative-rebalancing-kafka/</guid>
+          <description xml:base="https://theanig.github.io/blog/incremental-cooperative-rebalancing-kafka/">&lt;blockquote class=&quot;caution&quot;&gt;
+	&lt;p class=&quot;alert-title&quot;&gt;
+		&lt;i class=&quot;icon&quot;&gt;&lt;&#x2F;i&gt;Caution&lt;&#x2F;p&gt;
+	&lt;ul&gt;
+&lt;li&gt;Diagrams&lt;&#x2F;li&gt;
+&lt;li&gt;Change some of the bullet points to organic paragraphs by rewriting it&lt;&#x2F;li&gt;
+&lt;li&gt;Add personal anecdote about copycat and how consumergroups are created&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;Apache Kafka is a distributed messaging system that handles large data volumes efficiently and reliably. Producers publish data to topics, and consumers subscribe to these topics to consume the data. It also stores data across multiple brokers and partitions, allowing it to scale horizontally.&lt;&#x2F;p&gt;
+&lt;p&gt;One of the key challenges in maintaining Kafka’s performance is ensuring a balanced distribution of partitions across consumers. Kafka’s rebalancing process helps achieve this, but traditional approaches have significant drawbacks, leading to the introduction of incremental cooperative rebalancing as a more efficient alternative.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;key-concepts-in-kafka-rebalancing&quot;&gt;Key Concepts in Kafka Rebalancing&lt;&#x2F;h2&gt;
+&lt;p&gt;Before diving into cooperative rebalancing, let’s review some essential Kafka concepts:&lt;&#x2F;p&gt;
+&lt;figure&gt;
+&lt;img class=&quot;&quot;alt=&quot;A Brief Overview of Kafka Architecture&quot;src=&quot;kafka_architecture.svg&quot;&#x2F;&gt;
+&lt;figcaption&gt;
+    A Brief Overview of Kafka Architecture
+&lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Brokers&lt;&#x2F;strong&gt;: Servers that manage the storage and transfer of data within Kafka clusters.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Partition&lt;&#x2F;strong&gt;: A unit of parallelism within a Kafka topic, where each partition is an ordered, immutable sequence of records.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Consumer Group&lt;&#x2F;strong&gt;: A set of consumers that collaboratively consume data from one or more topics, with each consumer being assigned partitions.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Rebalance&lt;&#x2F;strong&gt;: The process of redistributing partitions among consumer instances in a group.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Partition Assignment Strategy&lt;&#x2F;strong&gt;: The algorithm Kafka uses to assign partitions, including round-robin, range, and sticky assignments.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;the-traditional-rebalancing-problem&quot;&gt;The Traditional Rebalancing Problem&lt;&#x2F;h2&gt;
+&lt;p&gt;Kafka rebalancing is triggered when consumers join or leave a group, new partitions are added, or consumer failures occur. The traditional “stop-the-world” rebalancing process involves:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Kafka notifying all consumers to stop consuming data.&lt;&#x2F;li&gt;
+&lt;li&gt;Consumers rejoining the group and undergoing partition reassignment.&lt;&#x2F;li&gt;
+&lt;li&gt;Consumers resuming processing once the rebalance completes.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;This approach comes with its fair share of challenges.
+One major issue is increased latency—whenever rebalancing happens, consumers are temporarily paused, this obviously leads to delays in processing messages.
+This can create bottlenecks, especially in systems that rely on real-time data flow. In my case the consumer service would start firing availability alerts on our pipelines if it took longer than 15minutes.
+On some very high throughput topics, this would mean to increase the consumer group size temporarily to handle the extra load this causes, then scale it back. Overall baby sitting this was unnecessary burden.&lt;&#x2F;p&gt;
+&lt;p&gt;Another concern is reduced throughput.
+Frequent rebalancing can disrupt the consumer group assignments, sometimes overloading some brokers and other times leaving them underutilized. This instability can make it harder to maintain optimal usage.&lt;&#x2F;p&gt;
+&lt;p&gt;Also, there’s the problem of higher resource usage.
+Every time partitions are moved around, it consumes CPU, memory, and network bandwidth.
+In large-scale deployments like ours, these overheads can quickly add up, impacting overall system performance.
+Finally, there’s the risk of potential data loss.
+If rebalancing isn’t handled carefully, unprocessed messages might slip through the cracks, leading to inconsistencies and gaps in the data pipeline, affecting some of our completeness guarantees.
+Ensuring that messages aren’t lost during transitions is another challenge for maintaining our SLAs.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;challenges-with-stop-the-world-rebalancing&quot;&gt;Challenges with Stop-the-World Rebalancing&lt;&#x2F;h2&gt;
+&lt;p&gt;When I first started working with Kafka, I quickly ran into the quirks of its traditional rebalancing model.
+On paper, it made sense—partitions get redistributed to keep things balanced.
+But in reality, the process wasn’t as smooth as I had hoped, especially as the system grew in complexity.&lt;&#x2F;p&gt;
+&lt;p&gt;One of the biggest pain points was scaling up and down. As we added more consumers or removed them, the rebalancing process became increasingly expensive.
+The more resources there were to shuffle around, the longer everything took, making what should have been a simple operation a performance headache.&lt;&#x2F;p&gt;
+&lt;p&gt;Then there was multi-tenancy.
+In shared environments where different teams were running diverse workloads, a single rebalancing event could unexpectedly impact someone else’s pipeline.
+I remember a time when our team’s batch processing job was disrupted mid-run simply because the consumer counts got adjusted on an unrelated topic.&lt;&#x2F;p&gt;
+&lt;p&gt;Rolling upgrades were another tricky part.
+Ideally, updating our infrastructure shouldn’t disrupt workloads, but Kafka’s default rebalancing model didn’t play nicely with rolling restarts.
+I remember this one time, an upgrade window which caused a full rebalancing event, slowing things down so much that what should have been a minor version bump turned into a whole bunch of pages constantly buzzing me.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;incremental-cooperative-rebalancing&quot;&gt;Incremental Cooperative Rebalancing&lt;&#x2F;h2&gt;
+&lt;p&gt;To mitigate these issues, Kafka 2.4 introduced incremental cooperative rebalancing, which improves the rebalance process by allowing consumers to retain their current assignments while incrementally taking on new partitions. This approach minimizes disruptions and ensures a smoother transition.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;key-improvements-of-incremental-cooperative-rebalancing&quot;&gt;Key Improvements of Incremental Cooperative Rebalancing&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Incremental Partition Transfer&lt;&#x2F;strong&gt;: Only affected partitions are reassigned instead of stopping all consumers.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Continuous Data Processing&lt;&#x2F;strong&gt;: Consumers remain active and process messages during rebalance.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Parallel Rebalancing&lt;&#x2F;strong&gt;: New consumers can join and consume data concurrently.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Graceful Partition Handling&lt;&#x2F;strong&gt;: Consumers are given a grace period to return before partitions are reassigned.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Sticky Assignor Implementation&lt;&#x2F;strong&gt;: This strategy optimizes assignments by trying to retain previous partition allocations.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;how-incremental-cooperative-rebalancing-works&quot;&gt;How Incremental Cooperative Rebalancing Works&lt;&#x2F;h2&gt;
+&lt;p&gt;Kafka clients use an embedded rebalance protocol to manage partition assignments autonomously without burdening Kafka brokers. The rebalancing process follows these steps:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Kafka sends a &lt;code&gt;GroupCoordinator&lt;&#x2F;code&gt; message to notify consumers.&lt;&#x2F;li&gt;
+&lt;li&gt;Consumers respond with a &lt;code&gt;JoinGroup&lt;&#x2F;code&gt; message to indicate participation.&lt;&#x2F;li&gt;
+&lt;li&gt;Consumers voluntarily release partitions that need reassignment.&lt;&#x2F;li&gt;
+&lt;li&gt;Incremental reassignment happens in multiple rounds without halting all consumers.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;The process completes when the workload is evenly distributed across consumers.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;reducing-rebalance-frequency&quot;&gt;Reducing Rebalance Frequency&lt;&#x2F;h2&gt;
+&lt;p&gt;While rebalancing is necessary, frequent rebalances can degrade performance. Some best practices to reduce rebalancing events include:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Increase Session Timeout&lt;&#x2F;strong&gt;: Adjust session.&lt;code&gt;timeout.ms&lt;&#x2F;code&gt; to allow consumers more time to recover before being marked as inactive.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Optimize Poll Intervals&lt;&#x2F;strong&gt;: Set &lt;code&gt;max.poll.interval.ms&lt;&#x2F;code&gt; to accommodate longer processing times.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Limit Partitions per Topic&lt;&#x2F;strong&gt;: Reducing the number of partitions can decrease rebalance occurrences.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Use Static Group Membership&lt;&#x2F;strong&gt;: Assign partitions manually to consumers for a fixed workload distribution.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;performance-improvements-with-incremental-cooperative-rebalancing&quot;&gt;Performance Improvements with Incremental Cooperative Rebalancing&lt;&#x2F;h2&gt;
+&lt;p&gt;Benchmarks&lt;sup class=&quot;footnote-reference&quot; id=&quot;fr-1-1&quot;&gt;&lt;a href=&quot;#fn-1&quot;&gt;[1]&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; have shown that incremental cooperative rebalancing drastically reduces rebalancing time and improves throughput in large-scale deployments. For instance, a test running 900 Kafka Connect tasks showed the following improvements:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Aggregate throughput increased by &lt;strong&gt;113%&lt;&#x2F;strong&gt;.&lt;&#x2F;li&gt;
+&lt;li&gt;Median throughput improved by &lt;strong&gt;101%&lt;&#x2F;strong&gt;.&lt;&#x2F;li&gt;
+&lt;li&gt;Maximum throughput saw an &lt;strong&gt;833% increase&lt;&#x2F;strong&gt;.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;These improvements result from the ability of Kafka clients to absorb resource fluctuations gracefully without completely stopping operations.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;&#x2F;h2&gt;
+&lt;p&gt;Incremental cooperative rebalancing in Kafka is a significant step forward in improving consumer group management. By transitioning from the traditional stop-the-world approach to a more gradual, cooperative model, organizations can achieve higher availability, scalability, and performance in their Kafka deployments.&lt;&#x2F;p&gt;
+&lt;p&gt;Implementing these techniques and understanding best practices ensures a more resilient and efficient streaming data pipeline, reducing disruptions and optimizing resource utilization.&lt;&#x2F;p&gt;
+&lt;hr&gt;&lt;ol class=&quot;footnotes-list&quot;&gt;
+&lt;li id=&quot;fn-1&quot;&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.confluent.io&#x2F;blog&#x2F;incremental-cooperative-rebalancing-in-kafka&#x2F;&quot;&gt;Incremental Cooperative Rebalancing in Apache Kafka: Why Stop the World When You Can Change It?&lt;&#x2F;a&gt; &lt;a href=&quot;#fr-1-1&quot;&gt;↩&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+</description>
+      </item>
+      <item>
+          <title>Using Fractals for feature extraction in image classification tasks</title>
+          <pubDate>Thu, 06 Dec 2018 00:00:00 +0000</pubDate>
+          <author>Anirudh Ganesh</author>
+          <link>https://theanig.github.io/blog/hilbert-curve-svm/</link>
+          <guid>https://theanig.github.io/blog/hilbert-curve-svm/</guid>
+          <description xml:base="https://theanig.github.io/blog/hilbert-curve-svm/">&lt;blockquote class=&quot;caution&quot;&gt;
+	&lt;p class=&quot;alert-title&quot;&gt;
+		&lt;i class=&quot;icon&quot;&gt;&lt;&#x2F;i&gt;Caution&lt;&#x2F;p&gt;
+	&lt;ul&gt;
+&lt;li&gt;explain wavelet transforms&lt;&#x2F;li&gt;
+&lt;li&gt;rearrange hilberts curve in the explanationor the article&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+
+&lt;&#x2F;blockquote&gt;
+&lt;h2 id=&quot;introduction-rethinking-feature-extraction-with-fractals&quot;&gt;Introduction: Rethinking Feature Extraction with Fractals&lt;&#x2F;h2&gt;
+&lt;p&gt;Feature extraction is at the core of image classification, a task that has seen groundbreaking advancements thanks to convolutional neural networks (CNNs). These models have revolutionized computer vision by leveraging spatial coherence to extract patterns, enabling machines to distinguish cats from dogs, recognize handwritten digits, and even detect tumors in medical scans. However, as powerful as CNNs are, they come with limitations—particularly their reliance on convolution operations, which are heavily tuned for two-dimensional data.&lt;&#x2F;p&gt;
+&lt;p&gt;What if there were an alternative to convolutions?
+One that could preserve spatial relationships while offering a fresh perspective on how we process and interpret image data?
+Enter fractals, the infinitely complex, self-replicating structures that bridge mathematics and nature.
+In this blog post, I’ll explore how fractal geometry, specifically the Hilbert curve, can provide a novel approach to feature extraction.&lt;&#x2F;p&gt;
+&lt;p&gt;This method reimagines image processing by transforming pixel data into a dense, one-dimensional representation using fractal-based mappings. Unlike traditional techniques, it takes advantage of the Hilbert curve’s ability to preserve locality and scale across resolutions, making it ideal for compact, efficient feature representation. Combined with wavelet transforms, which localize features in the frequency domain, this fractal-based approach opens up exciting possibilities for image classification and beyond.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;fractals-a-brief-overview&quot;&gt;Fractals: A brief overview&lt;&#x2F;h2&gt;
+&lt;p&gt;A fractal is an abstract object used to describe and simulate naturally occurring objects. The proper definition of a fractal, at least as Mandelbrot wrote it, is a shape whose “Hausdorff dimension” is greater than its “topological dimension”.
+Topological dimension is something that’s always an integer, wherein (loosely speaking) curve-ish things are 1-dimensional, surface-ish things are two-dimensional, etc. For example, a Koch Curve has topological dimension 1, and Hausdorff dimension 1.262. A rough surfaces might have topological dimension 2, but fractal dimension 2.3. And if a curve with topological dimension 1 has a Hausdorff dimension that happens to be exactly 2, or 3, or 4, etc., it would be considered a fractal, even though it’s fractal dimension is an integer.&lt;&#x2F;p&gt;
+&lt;p&gt;For purposes of my method we can simplify our view of fractal as essentially a never-ending pattern.
+But even under fractals, there is a special set of self-similar fractals. These are rendered by repeating a simple process. The interesting property about fractals is that they exist in non-whole number dimensions, as discussed above (The Hausdorff dimension). This property is super-useful as this means that they effectively encode information from a non-primary dimension, a fact that was used extensively for lossy image compression.&lt;&#x2F;p&gt;
+&lt;p&gt;We can use to our advantage this property to capture spatial, temporal or higher dimensional relation- ships in form of useful features that can be localized. (Using something like a Fourier transform or as in our case, wavelet transform)&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;space-filling-curves-and-practical-applications&quot;&gt;Space-Filling Curves and Practical Applications&lt;&#x2F;h2&gt;
+&lt;p&gt;Before diving into the technicalities, let’s talk about space-filling curves. These are mathematical constructions that, despite their counterintuitive nature, are immensely useful. A space-filling curve is a line that weaves through every point in a two-dimensional (or higher-dimensional) space. One famous example is the Hilbert curve, which can be visualized as a fractal that becomes progressively more intricate at higher resolutions.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;bridging-infinite-and-finite-realities&quot;&gt;Bridging Infinite and Finite Realities&lt;&#x2F;h3&gt;
+&lt;p&gt;Space-filling curves address a philosophical question central to mathematics: How can results based on infinite concepts be useful in our finite world? The Hilbert curve provides a fascinating answer. It starts as a theoretical construct, existing in an infinite, continuous mathematical space. But its finite approximations—pseudo-Hilbert curves—serve practical purposes, such as translating images into sound or encoding spatial information into dense, one-dimensional representations.&lt;&#x2F;p&gt;
+&lt;figure&gt;
+&lt;img class=&quot;&quot;alt=&quot;Example of a fractal&quot;src=&quot;mandelbrot_set.jpg&quot;&#x2F;&gt;
+&lt;figcaption&gt;
+The Mandelbrot set: its boundary is a fractal curve with Hausdorff dimension 2. Courtesy of Wikipedia
+&lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;p&gt;Let me illustrate with an example: Imagine developing a device that helps people “see with their ears.” The device takes data from a camera, translates it into sound, and lets users interpret spatial information through auditory cues. In this setup, the Hilbert curve provides a way to map 2D image data (pixels) into a 1D frequency space, preserving spatial relationships between pixels while creating a coherent auditory representation.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;fractals-in-feature-extraction-the-proposed-methodology&quot;&gt;Fractals in Feature Extraction: The Proposed Methodology&lt;&#x2F;h2&gt;
+&lt;p&gt;Fractals, with their self-similar and infinitely intricate structures, provide a powerful framework for extracting meaningful features from complex datasets like images &lt;sup class=&quot;footnote-reference&quot; id=&quot;fr-2-1&quot;&gt;&lt;a href=&quot;#fn-2&quot;&gt;[1]&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;. The goal is to transform 2D image data into a dense, 1D representation that preserves spatial relationships and is optimized for computational efficiency. This section breaks down the methodology into three key components: mapping pixels to frequencies, employing the Hilbert curve for serialization, and leveraging wavelet transforms for localization and compression.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;from-pixels-to-frequencies-bridging-the-dimensions&quot;&gt;From Pixels to Frequencies: Bridging the Dimensions&lt;&#x2F;h3&gt;
+&lt;p&gt;At the heart of the method is the challenge of mapping two-dimensional pixel data to a one-dimensional frequency domain.
+Each pixel is associated with a frequency, and its intensity determines the loudness of that frequency in the resulting signal.
+This transformation enables image data to be represented as a superposition of frequencies, much like a musical composition where different instruments (frequencies) contribute to the overall sound &lt;sup class=&quot;footnote-reference&quot; id=&quot;fr-1-1&quot;&gt;&lt;a href=&quot;#fn-1&quot;&gt;[2]&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;The challenge lies in ensuring that this mapping preserves spatial coherence. Pixels that are close together in the original image should remain close in the frequency representation &lt;sup class=&quot;footnote-reference&quot; id=&quot;fr-3-1&quot;&gt;&lt;a href=&quot;#fn-3&quot;&gt;[3]&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;. This is critical for maintaining the integrity of spatial relationships, which are often key to successful image classification. Without this coherence, the resulting representation would lose its ability to accurately capture the structure of the original image.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;comparing-space-filling-curves&quot;&gt;Comparing Space Filling Curves&lt;&#x2F;h2&gt;
+&lt;p&gt;Space-filling curves provide a structured way to map multi-dimensional data into one-dimensional representations while attempting to preserve spatial locality. However, not all space-filling curves are created equal. When choosing a curve for applications like image feature extraction, it’s crucial to evaluate their performance in preserving spatial relationships. Let’s compare three popular curves: the Z-curve, the Peano curve, and the Hilbert curve. &lt;sup class=&quot;footnote-reference&quot; id=&quot;fr-7-1&quot;&gt;&lt;a href=&quot;#fn-7&quot;&gt;[4]&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;the-z-curve&quot;&gt;The Z-Curve&lt;&#x2F;h3&gt;
+&lt;aside&gt;
+&lt;img class=&quot;&quot;alt=&quot;Example of a Z curve&quot;src=&quot;zcurve.png&quot;&#x2F;&gt;
+&lt;&#x2F;aside&gt;
+The Z-curve, or Morton order, follows a zig-zag pattern that makes it simple to implement but poor at preserving spatial relationships. In 2D, the Z-curve introduces significant gaps, with many adjacent points in the sequence mapping to coordinates that are far apart in the original space. This results in an average displacement for unit edges exceeding 1.6 in 2D and 1.35 in higher dimensions, making it unsuitable for applications requiring strong locality preservation.
+&lt;h3 id=&quot;peano-curve&quot;&gt;Peano Curve&lt;&#x2F;h3&gt;
+&lt;aside&gt;
+&lt;img class=&quot;&quot;alt=&quot;Example of a Peano curve&quot;src=&quot;peano.png&quot;&#x2F;&gt;
+&lt;&#x2F;aside&gt;
+The Peano curve, in contrast, is much better at maintaining spatial coherence. By mapping scalar unit lengths in 1D to unit Euclidean lengths in 2D, it ensures that horizontal segments are exactly one unit long, although vertical segments can stretch to 2 or 5 units, slightly raising the average displacement. The Peano curve also achieves asymptotic stability at higher ranks, with its performance aligning closely with the Hilbert curve as resolution increases.
+&lt;h3 id=&quot;hilbert-curve&quot;&gt;Hilbert Curve&lt;&#x2F;h3&gt;
+&lt;aside&gt;
+&lt;img class=&quot;&quot;alt=&quot;Example of a Hilbert curve&quot;src=&quot;hilbert256.png&quot;&#x2F;&gt;
+&lt;&#x2F;aside&gt;
+Hilbert curve stands out as the best option for preserving locality. Its recursive, self-similar structure ensures that adjacent points in the sequence remain as close as possible in the original space, outperforming the Peano curve in both horizontal and vertical coherence. The Hilbert curve also scales well to higher dimensions, maintaining its locality-preserving properties regardless of resolution. Studies such as Color-Space Dimension Reduction and Bongki 2001 consistently rate the Hilbert curve as the superior choice, edging out the Peano curve in overall performance.
+&lt;h2 id=&quot;implementation&quot;&gt;Implementation&lt;&#x2F;h2&gt;
+&lt;p&gt;To achieve a mapping that preserves spatial relationships, I turn to the Hilbert curve, a type of fractal known as a space-filling curve. The Hilbert curve provides an elegant solution to the problem of mapping 2D space to 1D space while preserving locality. Here’s why it’s so effective:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Locality Preservation: Points that are close together on the Hilbert curve are also close together in the 2D image. This ensures that nearby pixels are mapped to nearby frequencies, preserving spatial coherence.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Scalability: The Hilbert curve is recursive and self-similar, meaning it can scale to any resolution. Whether the image is 256x256 or 512x512 pixels, the curve adapts seamlessly, providing a consistent framework for feature extraction.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Stability Across Resolutions: As the resolution of an image increases, the points on the Hilbert curve move less and less. This stability is crucial for applications where the resolution may change over time, such as progressive updates to image datasets or hierarchical processing pipelines.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h3 id=&quot;the-process-of-hilbertification&quot;&gt;The Process of Hilbertification&lt;&#x2F;h3&gt;
+&lt;aside&gt;
+&lt;img class=&quot;&quot;alt=&quot;Example of a Hilbert Curve&quot;src=&quot;hilbert-curve-anim.gif&quot;&#x2F;&gt;
+Animation showing Hilbert Curve spanning an image of various resolutions. Courtesy of Wikipedia
+&lt;&#x2F;aside&gt;
+Hilbertification refers to the process of mapping an image’s pixel data to a 1D representation using the Hilbert curve. Here’s how it works:
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Divide the Image into Quadrants: The Hilbert curve starts by dividing the image into smaller regions, or quadrants, and defining a path that traverses each quadrant in a specific order.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Recursive Subdivision: Each quadrant is further subdivided into smaller grids, with the Hilbert curve path becoming increasingly intricate. This process repeats until the curve has visited every pixel in the image.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Generate a 1D Sequence: The final result is a 1D sequence of pixel intensities, where the order of the pixels reflects the traversal path of the Hilbert curve. This sequence forms the input for subsequent signal processing steps.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h3 id=&quot;wavelet-transforms-for-feature-localization-and-compression&quot;&gt;Wavelet Transforms for Feature Localization and Compression&lt;&#x2F;h3&gt;
+&lt;p&gt;After Hilbertification, the next step is to apply wavelet transforms, which are mathematical tools for analyzing signals at multiple scales. Unlike Fourier transforms, which only provide frequency information, wavelet transforms capture both frequency and spatial (or temporal) information, making them ideal for feature extraction in images.&lt;&#x2F;p&gt;
+&lt;figure&gt;
+&lt;img class=&quot;&quot;alt=&quot;Example of a Continuous Wavelet Transform&quot;src=&quot;Continuous_wavelet_transform.gif&quot;&#x2F;&gt;
+&lt;figcaption&gt;
+Animation showing how wavelet transforms work. Courtesy of Wikipedia
+&lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;h2 id=&quot;experimentation&quot;&gt;Experimentation&lt;&#x2F;h2&gt;
+&lt;p&gt;Support vector machines (SVMs) are a set of supervised learning methods used for classification, regression and outliers detection. The advantages of support vector machines are that they are effective in high dimensional spaces, still effective in cases where number of dimensions is greater than the number of samples, use a subset of training points in the decision function (called support vectors), so it is also memory efficient and versatile due to them supporting different Kernel functions which can be specified for the decision function. &lt;sup class=&quot;footnote-reference&quot; id=&quot;fr-5-1&quot;&gt;&lt;a href=&quot;#fn-5&quot;&gt;[5]&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;
+This was then followed by hilbertification, which is the process of serializing the image to the frequency domain as discussed earlier. This was then passed onto for localization.
+The fundamental idea of wavelet transforms is that the transformation should allow only changes in time extension, but not shape, this means that it encapsulates a denser representation of our signal on the time domain such that it preserves the spatial relationships as changes in the time extension are expected to conform to the corresponding analysis frequency of the basis function &lt;sup class=&quot;footnote-reference&quot; id=&quot;fr-6-1&quot;&gt;&lt;a href=&quot;#fn-6&quot;&gt;[6]&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;.
+This gives us a more dense set of features which is 1&#x2F;4 the size of the original image.&lt;&#x2F;p&gt;
+&lt;figure&gt;
+&lt;img class=&quot;&quot;alt=&quot;A Sample of the Data Used, before and after the proposed hilbertification method&quot;src=&quot;hilbert_diagram.svg&quot;&#x2F;&gt;
+&lt;figcaption&gt;
+    A Sample of the Data Used, before and after the proposed hilbertification method
+&lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;p&gt;Table below gives an overview of how my proposed method performs.
+Note that for my tests I had taken the entire image as a baseline.
+Apart from the documented results show below,
+I have also compared my method to cosine-transformed version of the dataset,
+in which case the result of the cosine-transformed classifiers were abnormally low so I decided to not publish those as it maybe due to my own faulty implementation
+I had also tried CIFAR-10 dataset, since that dataset is a color dataset, I did not get time to properly implement the method for the dataset.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;results-of-the-proposed-method&quot;&gt;Results of the Proposed Method&lt;&#x2F;h3&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Dataset&lt;&#x2F;th&gt;&lt;th&gt;Method&lt;&#x2F;th&gt;&lt;th&gt;Linear SVM&lt;&#x2F;th&gt;&lt;th&gt;RBF Kernel&lt;&#x2F;th&gt;&lt;th&gt;Polynomial Kernel&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;&lt;strong&gt;Fashion MNIST&lt;&#x2F;strong&gt;&lt;&#x2F;td&gt;&lt;td&gt;Hilbertified&lt;&#x2F;td&gt;&lt;td&gt;87.273&lt;&#x2F;td&gt;&lt;td&gt;88.275&lt;&#x2F;td&gt;&lt;td&gt;87.991&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;&#x2F;td&gt;&lt;td&gt;Baseline&lt;&#x2F;td&gt;&lt;td&gt;91.493&lt;&#x2F;td&gt;&lt;td&gt;89.917&lt;&#x2F;td&gt;&lt;td&gt;91.584&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;strong&gt;MNIST&lt;&#x2F;strong&gt;&lt;&#x2F;td&gt;&lt;td&gt;Hilbertified&lt;&#x2F;td&gt;&lt;td&gt;96.026&lt;&#x2F;td&gt;&lt;td&gt;96.535&lt;&#x2F;td&gt;&lt;td&gt;97.134&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;&#x2F;td&gt;&lt;td&gt;Baseline&lt;&#x2F;td&gt;&lt;td&gt;98.318&lt;&#x2F;td&gt;&lt;td&gt;98.661&lt;&#x2F;td&gt;&lt;td&gt;99.288&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;h2 id=&quot;conclusions&quot;&gt;Conclusions&lt;&#x2F;h2&gt;
+&lt;p&gt;In order to reduce the number of features that are being considered while classification is done and still achieve a better accuracy levels, I applied hilbertification to the dataset and then used wavelets to localize the features thus giving us a denser set of features almost one-fourth of the original image.
+The results that I saw was not significantly lower when compared to the results obtained while considering all the features.
+Thus, it can be said that my method indeed captures the spatial relationships as proposed.
+Based on this, I have come to believe that the proposed method is not only viable, it also encodes some of very useful spatial information in a very dense space.
+This method can be extended extensively in future work by expanding to higher number of dimensions since it can efficiently encode temporal and spatial and even higher order dimensional data.&lt;&#x2F;p&gt;
+&lt;hr&gt;&lt;ol class=&quot;footnotes-list&quot;&gt;
+&lt;li id=&quot;fn-2&quot;&gt;
+&lt;p&gt;Falconer, Kenneth (2003). “Fractal Geometry: Mathematical Foundations and Applications.” John Wiley &amp;amp; Sons. xxv ISBN 0-470-84862-6. &lt;a href=&quot;#fr-2-1&quot;&gt;↩&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li id=&quot;fn-1&quot;&gt;
+&lt;p&gt;von Melchner, Laurie &amp;amp; Pallas, Sarah &amp;amp; Sur, Mriganka (2000) “Visual Behaviour Mediated by Retinal Projections Directed to the Auditory Pathway.” Nature 404 871-6. 10.1038&#x2F;35009102. &lt;a href=&quot;#fr-1-1&quot;&gt;↩&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li id=&quot;fn-3&quot;&gt;
+&lt;p&gt;Boeing, G. (2016). “Visual Analysis of Nonlinear Dynamical Systems: Chaos, Fractals, Self-Similarity and the Limits of Prediction.” Systems 4 (4): 37. doi:10.3390&#x2F;systems4040037. &lt;a href=&quot;#fr-3-1&quot;&gt;↩&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li id=&quot;fn-7&quot;&gt;
+&lt;p&gt;Jaffer, Aubrey. “Color-Space Dimension Reduction.” Accessed November 19, 2018. https:&#x2F;&#x2F;people.csail.mit.edu&#x2F;jaffer&#x2F;CNS&#x2F;PSFCDR. &lt;a href=&quot;#fr-7-1&quot;&gt;↩&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li id=&quot;fn-5&quot;&gt;
+&lt;p&gt;Alex J. Smola, Bernhard Schölkopf. “A Tutorial on Support Vector Regression.” Statistics and Computing archive Volume 14 Issue 3, August 2004, p. 199-222. &lt;a href=&quot;#fr-5-1&quot;&gt;↩&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li id=&quot;fn-6&quot;&gt;
+&lt;p&gt;Chui, Charles K. (1992). “An Introduction to Wavelets.” San Diego: Academic Press ISBN 0-12-174584-8. &lt;a href=&quot;#fr-6-1&quot;&gt;↩&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+</description>
+      </item>
+      <item>
+          <title>End-to-end Sequence-Labeling via Bi-directional LSTM CNNs CRF Tutorial</title>
+          <pubDate>Sat, 25 Aug 2018 00:00:00 +0000</pubDate>
+          <author>Anirudh Ganesh</author>
+          <link>https://theanig.github.io/blog/ner-lstm-cnn-icml/</link>
+          <guid>https://theanig.github.io/blog/ner-lstm-cnn-icml/</guid>
+          <description xml:base="https://theanig.github.io/blog/ner-lstm-cnn-icml/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;&#x2F;h2&gt;
+&lt;p&gt;If you’ve ever dipped your toes into natural language processing (NLP), you’ve probably come across tasks like part-of-speech (POS) tagging and named entity recognition (NER). These are the bread and butter of understanding text—things like figuring out whether “Apple” in a sentence refers to a fruit or a tech giant. But let’s be honest, the traditional ways of handling these tasks? Not exactly user-friendly. They usually involve manually crafting features and preprocessing data for hours. It’s tedious, time-consuming, and doesn’t always translate well when you try to apply it to new types of text.&lt;&#x2F;p&gt;
+&lt;p&gt;That’s where a groundbreaking paper from ACL 2016 comes in: End-to-end Sequence Labeling via Bi-directional LSTM-CNNs-CRF by Xuezhe Ma and Eduard Hovy&lt;sup class=&quot;footnote-reference&quot; id=&quot;fr-1-1&quot;&gt;&lt;a href=&quot;#fn-1&quot;&gt;[1]&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;. Don’t let the fancy title scare you—this paper is a game-changer. It proposes a neural network model that completely flips the script on the traditional approach. Instead of hand-picking features, it combines character-level representations (thanks to Convolutional Neural Networks, or CNNs) with word-level context (handled by Bi-directional LSTMs). The cherry on top? A Conditional Random Field (CRF) layer that ties everything together for structured predictions.&lt;&#x2F;p&gt;
+&lt;p&gt;What’s so cool about this? Well, for starters, it’s an end-to-end model, which means it handles the entire process without requiring you to do all that annoying feature engineering. You just give it data, and it learns what it needs—automatically. It’s versatile too, working across a range of sequence labeling tasks.&lt;&#x2F;p&gt;
+&lt;p&gt;And the results? Pretty impressive. This model hit 97.55% accuracy on POS tagging with the Penn Treebank WSJ dataset and scored a solid 91.21% F1 on NER using the CoNLL 2003 dataset. Those are state-of-the-art numbers, by the way.&lt;&#x2F;p&gt;
+&lt;p&gt;Since its debut, this paper has left a big mark on the NLP community. It’s inspired a wave of follow-up research and implementations, all riffing on this idea of combining different neural network components into a single powerful system. This emphasis on end-to-end learning has made sequence labeling faster, easier, and way more adaptable.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;reproducibility&quot;&gt;Reproducibility&lt;&#x2F;h2&gt;
+&lt;p&gt;This is why I took this paper as a good candidate to present for reproducibility&lt;sup class=&quot;footnote-reference&quot; id=&quot;fr-2-1&quot;&gt;&lt;a href=&quot;#fn-2&quot;&gt;[2]&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;It’s a standout example of a complex yet impactful model, combining multiple neural network components into an end-to-end framework. The paper doesn’t just offer strong theoretical contributions; it also provides practical results that have influenced a significant portion of subsequent NLP research. By breaking down the BiLSTM-CNN-CRF model step-by-step, I wanted to demonstrate how a state-of-the-art system could be reproduced with modern tools like PyTorch, ensuring others could verify the results and, ideally, build upon them.&lt;&#x2F;p&gt;
+&lt;p&gt;Reproducibility in this case meant more than just rerunning the experiments—it meant making the implementation accessible, understandable, and adaptable to different use cases. During my preparation, I paid close attention to the potential pain points: ensuring the code was platform-agnostic, tuning hyperparameters to match those used in the paper, and structuring the codebase so others could easily tweak it for related tasks. The aim was to not only replicate the model’s impressive benchmark performance but to encourage further experimentation and adoption by the community.&lt;&#x2F;p&gt;
+&lt;p&gt;At the ICML workshop, this example opened up broader conversations about what it takes to make machine learning research truly reproducible. The discussion often circled back to the tools we use to share code and results. For instance, while frameworks like PyTorch offer flexibility and power, simply uploading a GitHub repository isn’t enough if it lacks proper documentation or doesn’t account for different computational setups. The group also explored the importance of including detailed training procedures and hyperparameter configurations—often overlooked but critical for achieving comparable results.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;tutorial&quot;&gt;Tutorial&lt;&#x2F;h2&gt;
+&lt;blockquote class=&quot;note&quot;&gt;
+	&lt;p class=&quot;alert-title&quot;&gt;
+		&lt;i class=&quot;icon&quot;&gt;&lt;&#x2F;i&gt;Note&lt;&#x2F;p&gt;
+	&lt;p&gt;Feel free to check out the linked repository to follow along with this article to implement your own state of the art NER pipeline&lt;&#x2F;p&gt;
+
+&lt;&#x2F;blockquote&gt;
+&lt;h3 id=&quot;data-preparation&quot;&gt;Data Preparation&lt;&#x2F;h3&gt;
+&lt;p&gt;Before we dive into the model, let’s prepare the data. We’ll use the CoNLL 2003 dataset, which contains text tagged for four types of named entities: PERSON, LOCATION, ORGANIZATION, and MISC.&lt;&#x2F;p&gt;
+&lt;p&gt;The dataset uses the BIO tagging scheme, where:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;B-TYPE indicates the beginning of an entity of type TYPE.&lt;&#x2F;li&gt;
+&lt;li&gt;I-TYPE indicates the continuation of the entity.&lt;&#x2F;li&gt;
+&lt;li&gt;O indicates that the word is not part of any entity.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;For example,&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;mathematica&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-mathematica &quot;&gt;&lt;code class=&quot;language-mathematica&quot; data-lang=&quot;mathematica&quot;&gt;&lt;span&gt;U.N.         NNP  I-NP  I-ORG
+&lt;&#x2F;span&gt;&lt;span&gt;official     NN   I-NP  O
+&lt;&#x2F;span&gt;&lt;span&gt;Ekeus        NNP  I-NP  I-PER
+&lt;&#x2F;span&gt;&lt;span&gt;heads        VBZ  I-VP  O
+&lt;&#x2F;span&gt;&lt;span&gt;for          IN   I-PP  O
+&lt;&#x2F;span&gt;&lt;span&gt;Baghdad      NNP  I-NP  I-LOC
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;We also preprocess the text by replacing all digits with 0. This step ensures that the model focuses on meaningful textual patterns instead of numeric details, which are often irrelevant in NER tasks.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;zero_digits&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;s&lt;&#x2F;span&gt;&lt;span&gt;):
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;re.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sub&lt;&#x2F;span&gt;&lt;span&gt;(&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\\&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;d&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;, &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;, s)
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;load_sentences&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;path&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;zeros&lt;&#x2F;span&gt;&lt;span&gt;):
+&lt;&#x2F;span&gt;&lt;span&gt;    sentences = []
+&lt;&#x2F;span&gt;&lt;span&gt;    sentence = []
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;line &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;in &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;open&lt;&#x2F;span&gt;&lt;span&gt;(path, &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;r&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;encoding&lt;&#x2F;span&gt;&lt;span&gt;=&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;utf-8&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;):
+&lt;&#x2F;span&gt;&lt;span&gt;        line = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;zero_digits&lt;&#x2F;span&gt;&lt;span&gt;(line.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rstrip&lt;&#x2F;span&gt;&lt;span&gt;()) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;zeros &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else &lt;&#x2F;span&gt;&lt;span&gt;line.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rstrip&lt;&#x2F;span&gt;&lt;span&gt;()
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;not line:
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;len&lt;&#x2F;span&gt;&lt;span&gt;(sentence) &amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;                sentences.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(sentence)
+&lt;&#x2F;span&gt;&lt;span&gt;                sentence = []
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;            word = line.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;split&lt;&#x2F;span&gt;&lt;span&gt;()
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;assert &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;len&lt;&#x2F;span&gt;&lt;span&gt;(word) &amp;gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2
+&lt;&#x2F;span&gt;&lt;span&gt;            sentence.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(word)
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;sentences
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;To align with the paper, we convert the tags to the BIOES scheme, which provides finer granularity by adding:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;E-TYPE for the end of an entity.&lt;&#x2F;li&gt;
+&lt;li&gt;S-TYPE for single-token entities.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;iob_iobes&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;tags&lt;&#x2F;span&gt;&lt;span&gt;):
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&amp;quot;&amp;quot;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;    the function is used to convert
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;    BIO -&amp;gt; BIOES tagging
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;    &amp;quot;&amp;quot;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    new_tags = []
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;i, tag &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;in &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;enumerate&lt;&#x2F;span&gt;&lt;span&gt;(tags):
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;tag == &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;O&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;:
+&lt;&#x2F;span&gt;&lt;span&gt;            new_tags.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(tag)
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;elif &lt;&#x2F;span&gt;&lt;span&gt;tag.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;split&lt;&#x2F;span&gt;&lt;span&gt;(&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;)[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;] == &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;B&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;:
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;i + &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1 &lt;&#x2F;span&gt;&lt;span&gt;!= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;len&lt;&#x2F;span&gt;&lt;span&gt;(tags) and \
+&lt;&#x2F;span&gt;&lt;span&gt;               tags[i + &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;].&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;split&lt;&#x2F;span&gt;&lt;span&gt;(&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;)[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;] == &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;I&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;:
+&lt;&#x2F;span&gt;&lt;span&gt;                new_tags.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(tag)
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;                new_tags.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(tag.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;replace&lt;&#x2F;span&gt;&lt;span&gt;(&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;B-&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;, &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;S-&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;))
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;elif &lt;&#x2F;span&gt;&lt;span&gt;tag.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;split&lt;&#x2F;span&gt;&lt;span&gt;(&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;)[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;] == &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;I&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;:
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;i + &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1 &lt;&#x2F;span&gt;&lt;span&gt;&amp;lt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;len&lt;&#x2F;span&gt;&lt;span&gt;(tags) and \
+&lt;&#x2F;span&gt;&lt;span&gt;                    tags[i + &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;].&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;split&lt;&#x2F;span&gt;&lt;span&gt;(&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;)[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;] == &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;I&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;:
+&lt;&#x2F;span&gt;&lt;span&gt;                new_tags.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(tag)
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;                new_tags.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(tag.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;replace&lt;&#x2F;span&gt;&lt;span&gt;(&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;I-&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;, &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;E-&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;))
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;raise &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Exception&lt;&#x2F;span&gt;&lt;span&gt;(&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Invalid IOB format!&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;)
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;new_tags
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;mappings-and-word-embeddings&quot;&gt;Mappings and Word Embeddings&lt;&#x2F;h3&gt;
+&lt;p&gt;To train our model, we need to convert words, characters, and tags into numeric representations. This mapping allows us to leverage efficient matrix operations in PyTorch. For word embeddings, we use pre-trained GloVe vectors (100-dimensional) trained on Wikipedia and Gigaword data. These embeddings provide a semantic representation of words, which significantly boosts the model’s performance.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span&gt;word_to_id, id_to_word = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;create_mapping&lt;&#x2F;span&gt;&lt;span&gt;(train_sentences)
+&lt;&#x2F;span&gt;&lt;span&gt;char_to_id, id_to_char = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;create_mapping&lt;&#x2F;span&gt;&lt;span&gt;(train_sentences, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;level&lt;&#x2F;span&gt;&lt;span&gt;=&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;char&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;)
+&lt;&#x2F;span&gt;&lt;span&gt;tag_to_id, id_to_tag = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;create_mapping&lt;&#x2F;span&gt;&lt;span&gt;(train_sentences, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;level&lt;&#x2F;span&gt;&lt;span&gt;=&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;tag&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;We also load GloVe embeddings into a matrix and initialize missing embeddings randomly:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span&gt;word_embeds = np.random.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;uniform&lt;&#x2F;span&gt;&lt;span&gt;(-np.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sqrt&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0.06&lt;&#x2F;span&gt;&lt;span&gt;), np.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sqrt&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0.06&lt;&#x2F;span&gt;&lt;span&gt;), (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;len&lt;&#x2F;span&gt;&lt;span&gt;(word_to_id), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;100&lt;&#x2F;span&gt;&lt;span&gt;))
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;word &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;in &lt;&#x2F;span&gt;&lt;span&gt;word_to_id:
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;word in glove_embeds:
+&lt;&#x2F;span&gt;&lt;span&gt;        word_embeds[word_to_id[word]] = glove_embeds[word]
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;model-architecture&quot;&gt;Model Architecture&lt;&#x2F;h3&gt;
+&lt;p&gt;The BiLSTM-CNN-CRF model has three main components:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;CNN for Character Embeddings: Generates a character-level representation for each word using convolutional and max-pooling layers. This step captures morphological patterns like prefixes and suffixes.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;BiLSTM for Word Encoding: Combines word embeddings (GloVe + character embeddings) and processes them bidirectionally. This helps capture context from both the left and right of each word.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;CRF for Structured Prediction: Ensures that predictions respect tagging constraints (e.g., I-ORG cannot follow I-PER).&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;The model that we are presenting is a complicated one, since its a hybridized network using LSTMs and CNNs. So in order to break down the complexity, we have attempted to simplify the process by splitting up operations into individual functions that we can go over part by part. This hopefully makes the whole thing more easily digestable and gives a more intuitive understanding of the whole process.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;initialization-of-weights&quot;&gt;Initialization of weights&lt;&#x2F;h4&gt;
+&lt;p&gt;We start with the init_embedding function, which just initializes the embedding layer by pooling from a random sample.&lt;&#x2F;p&gt;
+&lt;p&gt;The distribution is pooled from $-\sqrt{\frac{3}{V}}$ to $+\sqrt{\frac{3}{V}}$ where $V$ is the embedding dimension size.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span&gt;    bias = np.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sqrt&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;3.0 &lt;&#x2F;span&gt;&lt;span&gt;&#x2F; input_embedding.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;size&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;))
+&lt;&#x2F;span&gt;&lt;span&gt;    nn.init.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;uniform&lt;&#x2F;span&gt;&lt;span&gt;(input_embedding, -bias, bias)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The LSTM layers are initialized by uniform sampling from $-\sqrt{\frac{6}{r + c}}$ to $+\sqrt{\frac{6}{r + c}}$. Where $r$ is the number of rows, $c$ is the number of columns (based on the shape of the weight matrix).&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span&gt;    bias = np.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sqrt&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;6.0 &lt;&#x2F;span&gt;&lt;span&gt;&#x2F; (input_linear.weight.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;size&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;) + input_linear.weight.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;size&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;)))
+&lt;&#x2F;span&gt;&lt;span&gt;    nn.init.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;uniform&lt;&#x2F;span&gt;&lt;span&gt;(input_linear.weight, -bias, bias)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h4 id=&quot;crf-layer&quot;&gt;CRF Layer&lt;&#x2F;h4&gt;
+&lt;p&gt;We have two options:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;softmax&lt;&#x2F;strong&gt;: normalize the scores into a vector such that can be interpreted as the probability that the word belongs to class. Eventually, the probability of a sequence of tag $y$ is the product of all tags.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;linear-chain CRF&lt;&#x2F;strong&gt;: the first method makes local choices. In other words, even if we capture some information from the context thanks to the bi-LSTM, the tagging decision is still local. We don’t make use of the neighbooring tagging decisions. Given a sequence of words $w_1, …, w_m$, a sequence of score vectors
+$s_1, …, s_m$ and a sequence of tags $y_1, …, y_m$, a linear-chain CRF defines a global score $C \in \R$ such that&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;$$
+C(y_1, …, y_m) = b[y_1] + \sum_{t=1}^m s_t[y_t] + \sum_{t=1}^{m-1}T[y_t, y_{t+1}] + e[y_m]
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;where $T$ is a transition matrix in $\R^{9x9}$ and $e, b \in \R^9$ are vectors of scores that capture the cost of beginning or ending with a given tag. The use of the matrix $T$ captures linear (one step) dependencies between tagging decisions.&lt;&#x2F;p&gt;
+&lt;p&gt;The motivation behind CRFs was to generate sentence level likelihoods for optimal tags. What that means is for each word we estimate maximum likelihood and then we use the Viterbi algorithm to decode the tag sequence optimally.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Advantages of CRF over Softmax:&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Softmax doesn’t value any dependencies, this is a problem since NER the context heavily influences the tag that is assigned. This is solved by applying CRF as it takes into account the full sequence to assign the tag.&lt;&#x2F;li&gt;
+&lt;li&gt;Example: I-ORG cannot directly follow I-PER.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;figure&gt;
+&lt;img class=&quot;&quot;alt=&quot;A simple CRF network&quot;src=&quot;simple_crf_network.svg&quot;&#x2F;&gt;
+&lt;figcaption&gt;
+A simple CRF network
+&lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;p&gt;The figure shows a simple CRF network, in our case we have the inputs feeding in from our BiLSTMs, but otherwise the structure largely remains the same.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;score-calculation&quot;&gt;Score Calculation&lt;&#x2F;h4&gt;
+&lt;p&gt;CRF computes a conditional probability. Let $y$ be a tag sequence and x an input of sequence of words. Then we compute
+$$
+P(y|x) = \frac{exp(Score(x, y))}{\sum_{y’}exp(Score(x, y’))}
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;Where the score is determined by defining some log potentials $log\psi_i(x, y)$ such that
+$$
+Score(x, y) = \sum_i log\psi_i(x, y)
+$$&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;log_sum_exp&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;vec&lt;&#x2F;span&gt;&lt;span&gt;):
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&amp;#39;&amp;#39;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;    This function calculates the score explained above for the forward algorithm
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;    vec 2D: 1 * tagset_size
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;    &amp;#39;&amp;#39;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span&gt;    max_score = vec[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;argmax&lt;&#x2F;span&gt;&lt;span&gt;(vec)]
+&lt;&#x2F;span&gt;&lt;span&gt;    max_score_broadcast = max_score.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;view&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;, -&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;expand&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;, vec.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;size&lt;&#x2F;span&gt;&lt;span&gt;()[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;])
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;max_score + torch.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;log&lt;&#x2F;span&gt;&lt;span&gt;(torch.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sum&lt;&#x2F;span&gt;&lt;span&gt;(torch.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;exp&lt;&#x2F;span&gt;&lt;span&gt;(vec - max_score_broadcast)))
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This is the score function for our sentences. This function takes a list of ground truths that tell us what the corresponding tags are and the features which contains the supposed tagged parts of the function. Which is then used to compute the score.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;score_sentences&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;feats&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;tags&lt;&#x2F;span&gt;&lt;span&gt;):
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# tags is ground_truth, a list of ints, length is len(sentence)
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# feats is a 2D tensor, len(sentence) * tagset_size
+&lt;&#x2F;span&gt;&lt;span&gt;    r = torch.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;LongTensor&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;range&lt;&#x2F;span&gt;&lt;span&gt;(feats.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;size&lt;&#x2F;span&gt;&lt;span&gt;()[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;]))
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.use_gpu:
+&lt;&#x2F;span&gt;&lt;span&gt;        r = r.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cuda&lt;&#x2F;span&gt;&lt;span&gt;()
+&lt;&#x2F;span&gt;&lt;span&gt;        pad_start_tags = torch.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cat&lt;&#x2F;span&gt;&lt;span&gt;([torch.cuda.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;LongTensor&lt;&#x2F;span&gt;&lt;span&gt;([&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.tag_to_ix[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;START_TAG&lt;&#x2F;span&gt;&lt;span&gt;]]), tags])
+&lt;&#x2F;span&gt;&lt;span&gt;        pad_stop_tags = torch.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cat&lt;&#x2F;span&gt;&lt;span&gt;([tags, torch.cuda.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;LongTensor&lt;&#x2F;span&gt;&lt;span&gt;([&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.tag_to_ix[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;STOP_TAG&lt;&#x2F;span&gt;&lt;span&gt;]])])
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;        pad_start_tags = torch.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cat&lt;&#x2F;span&gt;&lt;span&gt;([torch.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;LongTensor&lt;&#x2F;span&gt;&lt;span&gt;([&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.tag_to_ix[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;START_TAG&lt;&#x2F;span&gt;&lt;span&gt;]]), tags])
+&lt;&#x2F;span&gt;&lt;span&gt;        pad_stop_tags = torch.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cat&lt;&#x2F;span&gt;&lt;span&gt;([tags, torch.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;LongTensor&lt;&#x2F;span&gt;&lt;span&gt;([&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.tag_to_ix[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;STOP_TAG&lt;&#x2F;span&gt;&lt;span&gt;]])])
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    score = torch.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sum&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.transitions[pad_stop_tags, pad_start_tags]) + torch.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sum&lt;&#x2F;span&gt;&lt;span&gt;(feats[r, tags])
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;score
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h4 id=&quot;viterbi-decode&quot;&gt;Viterbi decode&lt;&#x2F;h4&gt;
+&lt;p&gt;Viterbi decode is basically applying dynamic programming to choosing our tag sequence. Let’s suppose that we have the solution&lt;&#x2F;p&gt;
+&lt;p&gt;$$ \tilde s_t(y_t) = argmax_{y_t, …, y_m} C(y_t, …, y_m) = argmax_{y_{t+1}}s_t[y_t] + T[y_t, y_{t+1}] + \tilde s_{t+1}(y^{t+1}) $$&lt;&#x2F;p&gt;
+&lt;p&gt;Then, we can easily define the probability of a given sequence of tags as&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+\mathbb{P}(y_1, …, y_m) = \frac{e^{C(y_t, …, y_m)}}{Z}
+$$&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;forward_calc&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sentence&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;chars&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;chars2_length&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;d&lt;&#x2F;span&gt;&lt;span&gt;):
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&amp;#39;&amp;#39;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;    The function calls viterbi decode and generates the
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;    most probable sequence of tags for the sentence
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;    &amp;#39;&amp;#39;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Get the emission scores from the BiLSTM
+&lt;&#x2F;span&gt;&lt;span&gt;    feats = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;_get_lstm_features&lt;&#x2F;span&gt;&lt;span&gt;(sentence, chars, chars2_length, d)
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# viterbi to get tag_seq
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Find the best path, given the features.
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.use_crf:
+&lt;&#x2F;span&gt;&lt;span&gt;        score, tag_seq = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;viterbi_decode&lt;&#x2F;span&gt;&lt;span&gt;(feats)
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;        score, tag_seq = torch.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;max&lt;&#x2F;span&gt;&lt;span&gt;(feats, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;        tag_seq = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;list&lt;&#x2F;span&gt;&lt;span&gt;(tag_seq.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cpu&lt;&#x2F;span&gt;&lt;span&gt;().data)
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;score, tag_seq
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;model-details&quot;&gt;Model Details&lt;&#x2F;h3&gt;
+&lt;h4 id=&quot;cnn-model-for-generating-character-embeddings&quot;&gt;CNN model for generating character embeddings&lt;&#x2F;h4&gt;
+&lt;p&gt;Consider the word ‘cat’, we pad it on both ends to get our maximum word length ( this is mainly an implementation quirk since we can’t have variable length layers at run time, our algorithm will ignore the pads).&lt;&#x2F;p&gt;
+&lt;figure&gt;
+&lt;img class=&quot;&quot;alt=&quot;Convolution Model for generating character embeddings&quot;src=&quot;convolution_model_details.svg&quot;&#x2F;&gt;
+&lt;figcaption&gt;
+    Convolution Model for generating character embeddings
+&lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+We then apply a convolution layer on top that generates spatial coherence across characters, we use a maxpool to extract meaningful features out of our convolution layer. This now gives us a dense vector representation of each word. This representation will be concatenated with the pre-trained GloVe embeddings using a simple lookup.
+&lt;p&gt;This snippet shows us how the CNN is implemented in pytorch&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.char_cnn3 = nn.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Conv2d&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;in_channels&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;out_channels&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.out_channels, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;kernel_size&lt;&#x2F;span&gt;&lt;span&gt;=(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span&gt;, char_embedding_dim), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;padding&lt;&#x2F;span&gt;&lt;span&gt;=(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;))
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h4 id=&quot;lstm-model-that-generates-tags-for-the-given-sequence&quot;&gt;LSTM model that generates tags for the given sequence&lt;&#x2F;h4&gt;
+&lt;p&gt;The word-embeddings( glove+char embedding ) that we generated above, we feed to a bi-directional LSTM model. The LSTM model has 2 layers,&lt;&#x2F;p&gt;
+&lt;figure&gt;
+&lt;img class=&quot;&quot;alt=&quot;LSTMs for Tag Generation&quot;src=&quot;lstm_based_tag_generation.svg&quot;&#x2F;&gt;
+&lt;figcaption&gt;
+    LSTMs for Tag Generation
+&lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The forward layer takes in a sequence of word vectors and generates a new vector based on what it has seen so far in the forward direction (starting from the start word up until current word) this vector can be thought of as a summary of all the words it has seen.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;The backwards layer does the same but in opposite direction, i.e., from the end of the sentence to the current word.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;The forward vector and the backwards vector at current word concatanate to generate a unified representation.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;This snippet shows us how the BiLSTM is implemented in pytorch&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.lstm = nn.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;LSTM&lt;&#x2F;span&gt;&lt;span&gt;(embedding_dim+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.out_channels, hidden_dim, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;bidirectional&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;True&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h4 id=&quot;main-model-implementation&quot;&gt;Main Model Implementation&lt;&#x2F;h4&gt;
+&lt;p&gt;The get_lstm_features function returns the LSTM’s tag vectors. The function performs all the steps mentioned above for the model.&lt;&#x2F;p&gt;
+&lt;p&gt;Steps:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;It takes in characters, converts them to embeddings using our character CNN.&lt;&#x2F;li&gt;
+&lt;li&gt;We concat Character Embeeding with glove vectors, use this as features that we feed to Bidirectional-LSTM.&lt;&#x2F;li&gt;
+&lt;li&gt;The Bidirectional-LSTM generates outputs based on these set of features.&lt;&#x2F;li&gt;
+&lt;li&gt;The output are passed through a linear layer to convert to tag space&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.char_mode == &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;LSTM&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;:
+&lt;&#x2F;span&gt;&lt;span&gt;    chars_embeds = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;char_embeds&lt;&#x2F;span&gt;&lt;span&gt;(chars2).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;transpose&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;    packed = torch.nn.utils.rnn.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pack_padded_sequence&lt;&#x2F;span&gt;&lt;span&gt;(chars_embeds, chars2_length)
+&lt;&#x2F;span&gt;&lt;span&gt;    lstm_out, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;_ &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;char_lstm&lt;&#x2F;span&gt;&lt;span&gt;(packed)
+&lt;&#x2F;span&gt;&lt;span&gt;    outputs, output_lengths = torch.nn.utils.rnn.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pad_packed_sequence&lt;&#x2F;span&gt;&lt;span&gt;(lstm_out)
+&lt;&#x2F;span&gt;&lt;span&gt;    outputs = outputs.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;transpose&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;    chars_embeds_temp = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Variable&lt;&#x2F;span&gt;&lt;span&gt;(torch.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;FloatTensor&lt;&#x2F;span&gt;&lt;span&gt;(torch.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;zeros&lt;&#x2F;span&gt;&lt;span&gt;((outputs.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;size&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;), outputs.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;size&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;)))))
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.use_gpu:
+&lt;&#x2F;span&gt;&lt;span&gt;        chars_embeds_temp = chars_embeds_temp.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cuda&lt;&#x2F;span&gt;&lt;span&gt;()
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;i, index &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;in &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;enumerate&lt;&#x2F;span&gt;&lt;span&gt;(output_lengths):
+&lt;&#x2F;span&gt;&lt;span&gt;        chars_embeds_temp[i] = torch.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cat&lt;&#x2F;span&gt;&lt;span&gt;((outputs[i, index-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;, :&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.char_lstm_dim], outputs[i, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.char_lstm_dim:]))
+&lt;&#x2F;span&gt;&lt;span&gt;    chars_embeds = chars_embeds_temp.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;clone&lt;&#x2F;span&gt;&lt;span&gt;()
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;i &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;in &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;range&lt;&#x2F;span&gt;&lt;span&gt;(chars_embeds.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;size&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;)):
+&lt;&#x2F;span&gt;&lt;span&gt;        chars_embeds[d[i]] = chars_embeds_temp[i]
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.char_mode == &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;CNN&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;:
+&lt;&#x2F;span&gt;&lt;span&gt;    chars_embeds = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;char_embeds&lt;&#x2F;span&gt;&lt;span&gt;(chars2).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;unsqueeze&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;## Creating Character level representation using Convolutional Neural Netowrk
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;## followed by a Maxpooling Layer
+&lt;&#x2F;span&gt;&lt;span&gt;    chars_cnn_out3 = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;char_cnn3&lt;&#x2F;span&gt;&lt;span&gt;(chars_embeds)
+&lt;&#x2F;span&gt;&lt;span&gt;    chars_embeds = nn.functional.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;max_pool2d&lt;&#x2F;span&gt;&lt;span&gt;(chars_cnn_out3,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;kernel_size&lt;&#x2F;span&gt;&lt;span&gt;=(chars_cnn_out3.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;size&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;)).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;view&lt;&#x2F;span&gt;&lt;span&gt;(chars_cnn_out3.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;size&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.out_channels)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;training-the-model&quot;&gt;Training the model&lt;&#x2F;h3&gt;
+&lt;p&gt;We train the model using stochastic gradient descent (SGD) with a learning rate of 0.015 and momentum of 0.9. To avoid overfitting, we apply dropout and use gradient clipping&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span&gt;optimizer = torch.optim.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;SGD&lt;&#x2F;span&gt;&lt;span&gt;(model.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;parameters&lt;&#x2F;span&gt;&lt;span&gt;(), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;lr&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0.015&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;momentum&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0.9&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;We also calculate the negative log-likelihood as our loss function:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;def &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;neg_log_likelihood&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sentence&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;tags&lt;&#x2F;span&gt;&lt;span&gt;):
+&lt;&#x2F;span&gt;&lt;span&gt;    feats = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;get_lstm_features&lt;&#x2F;span&gt;&lt;span&gt;(sentence)
+&lt;&#x2F;span&gt;&lt;span&gt;    forward_score = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;forward_algorithm&lt;&#x2F;span&gt;&lt;span&gt;(feats)
+&lt;&#x2F;span&gt;&lt;span&gt;    gold_score = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;score_sentence&lt;&#x2F;span&gt;&lt;span&gt;(feats, tags)
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;forward_score - gold_score
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;evaluation-and-testing&quot;&gt;Evaluation and Testing&lt;&#x2F;h3&gt;
+&lt;p&gt;After training, we evaluate the model using precision, recall, and F1-score. Here’s an example of the model tagging new sentences:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span&gt;sentence = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Jay is from India.&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;prediction = model.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;predict&lt;&#x2F;span&gt;&lt;span&gt;(sentence)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;print&lt;&#x2F;span&gt;&lt;span&gt;(prediction)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This gives us the output:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;yaml&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-yaml &quot;&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Jay &lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;PER
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;is &lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;NA
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;from &lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;NA
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;India &lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;LOC
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;… and that’s it! That gets us a state of the art NER pipeline!&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;closing-thoughts&quot;&gt;Closing Thoughts&lt;&#x2F;h2&gt;
+&lt;p&gt;Presenting this work at the workshop was an incredibly rewarding experience. It wasn’t just about showcasing the BiLSTM-CNN-CRF model or diving into the nitty-gritty of the implementation details in PyTorch, but seeing researchers and practitioners engage with this tutorial, ask thoughtful questions, and discuss their own challenges made all the preparation worth it.&lt;&#x2F;p&gt;
+&lt;p&gt;If you have any thoughts, questions, or feedback, feel free to reach out—I’d love to hear from you!&lt;&#x2F;p&gt;
+&lt;blockquote class=&quot;note&quot;&gt;
+	&lt;p class=&quot;alert-title&quot;&gt;
+		&lt;i class=&quot;icon&quot;&gt;&lt;&#x2F;i&gt;Note&lt;&#x2F;p&gt;
+	&lt;p&gt;The work in this article was presented at ICML 2018, MLTrain Workshop “Enabling Reproducability in Machine Learning”.&lt;&#x2F;p&gt;
+
+&lt;&#x2F;blockquote&gt;
+&lt;hr&gt;&lt;ol class=&quot;footnotes-list&quot;&gt;
+&lt;li id=&quot;fn-1&quot;&gt;
+&lt;p&gt;Link to the original paper: &lt;a href=&quot;https:&#x2F;&#x2F;aclanthology.org&#x2F;P16-1101&#x2F;&quot;&gt;End-to-end Sequence Labeling via Bi-directional LSTM-CNNs-CRF&lt;&#x2F;a&gt; &lt;a href=&quot;#fr-1-1&quot;&gt;↩&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li id=&quot;fn-2&quot;&gt;
+&lt;p&gt;Link to the repository: &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;TheAnig&#x2F;NER-LSTM-CNN-Pytorch&quot;&gt;NER-LSTM-CNN-Pytorch&lt;&#x2F;a&gt; &lt;a href=&quot;#fr-2-1&quot;&gt;↩&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+</description>
+      </item>
+      <item>
+          <title>Deep Learning Methods for Quotable Text</title>
+          <pubDate>Thu, 26 Jul 2018 00:00:00 +0000</pubDate>
+          <author>Anirudh Ganesh</author>
+          <link>https://theanig.github.io/blog/deep-learning-for-memorable-quotes/</link>
+          <guid>https://theanig.github.io/blog/deep-learning-for-memorable-quotes/</guid>
+          <description xml:base="https://theanig.github.io/blog/deep-learning-for-memorable-quotes/">&lt;h2 id=&quot;abstract&quot;&gt;Abstract&lt;&#x2F;h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The goal of this study is to find out what makes a given sentence more memorable and quotable
+than others. Traditional methods of linguistic analysis have been done historically and they’ve had
+limited sucess. The aim of this study is to find out whether a machine learning solely on its own, is
+able to learn more effectively.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+</description>
+      </item>
+    </channel>
+</rss>

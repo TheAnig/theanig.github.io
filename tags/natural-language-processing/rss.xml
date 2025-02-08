@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+      <title>TheAnig - natural-language-processing</title>
+      <link>https://theanig.github.io</link>
+      <description>This is my own personal corner of the internet</description>
+      <generator>Zola</generator>
+      <language>en</language>
+      <atom:link href="https://theanig.github.io/tags/natural-language-processing/rss.xml" rel="self" type="application/rss+xml"/>
+      <lastBuildDate>Thu, 26 Jul 2018 00:00:00 +0000</lastBuildDate>
+      <item>
+          <title>Deep Learning Methods for Quotable Text</title>
+          <pubDate>Thu, 26 Jul 2018 00:00:00 +0000</pubDate>
+          <author>Anirudh Ganesh</author>
+          <link>https://theanig.github.io/blog/deep-learning-for-memorable-quotes/</link>
+          <guid>https://theanig.github.io/blog/deep-learning-for-memorable-quotes/</guid>
+          <description xml:base="https://theanig.github.io/blog/deep-learning-for-memorable-quotes/">&lt;h2 id=&quot;abstract&quot;&gt;Abstract&lt;&#x2F;h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The goal of this study is to find out what makes a given sentence more memorable and quotable
+than others. Traditional methods of linguistic analysis have been done historically and they’ve had
+limited sucess. The aim of this study is to find out whether a machine learning solely on its own, is
+able to learn more effectively.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+</description>
+      </item>
+    </channel>
+</rss>
